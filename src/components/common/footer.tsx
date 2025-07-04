@@ -22,7 +22,7 @@ export default function Footer() {
             </Link>
           </nav>
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} JewelKart Ultra. All rights reserved.
+            © {new Date().getFullYear()} Elegant Treasures. All rights reserved.
           </p>
         </div>
       </div>
