@@ -38,7 +38,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="flex flex-col">
             <Logo />
-            <p className="mt-4 text-sm text-muted-foreground/80">
+            <p className="mt-4 text-sm text-secondary-foreground/80">
               Crafting timeless memories, one jewel at a time.
             </p>
           </div>
@@ -50,7 +50,7 @@ export default function Footer() {
                 <ul className="space-y-2">
                   {footerLinks.shop.map(link => (
                     <li key={link.title}>
-                      <Link href={link.href} className="text-sm text-muted-foreground/80 hover:text-primary transition-colors">
+                      <Link href={link.href} className="text-sm text-secondary-foreground/80 hover:text-primary transition-colors">
                         {link.title}
                       </Link>
                     </li>
@@ -62,7 +62,7 @@ export default function Footer() {
                 <ul className="space-y-2">
                   {footerLinks.about.map(link => (
                     <li key={link.title}>
-                      <Link href={link.href} className="text-sm text-muted-foreground/80 hover:text-primary transition-colors">
+                      <Link href={link.href} className="text-sm text-secondary-foreground/80 hover:text-primary transition-colors">
                         {link.title}
                       </Link>
                     </li>
@@ -74,7 +74,7 @@ export default function Footer() {
                 <ul className="space-y-2">
                   {footerLinks.support.map(link => (
                     <li key={link.title}>
-                      <Link href={link.href} className="text-sm text-muted-foreground/80 hover:text-primary transition-colors">
+                      <Link href={link.href} className="text-sm text-secondary-foreground/80 hover:text-primary transition-colors">
                         {link.title}
                       </Link>
                     </li>
@@ -86,22 +86,22 @@ export default function Footer() {
           
           <div>
             <h3 className="font-headline text-lg mb-4">Stay Connected</h3>
-            <p className="text-sm text-muted-foreground/80 mb-4">
+            <p className="text-sm text-secondary-foreground/80 mb-4">
               Get updates on new collections and exclusive offers.
             </p>
             <form className="flex gap-2">
-              <Input placeholder="Your Email" className="bg-background/20 border-border/30" />
+              <Input placeholder="Your Email" className="bg-muted border-border/30" />
               <Button>Subscribe</Button>
             </form>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground/60">
+          <p className="text-sm text-secondary-foreground/60">
             © {new Date().getFullYear()} Sparkle. All rights reserved.
           </p>
           <div className="flex gap-4">
             {socialLinks.map(link => (
-              <Link key={link.name} href={link.href} aria-label={link.name} className="text-muted-foreground/60 hover:text-primary transition-colors">
+              <Link key={link.name} href={link.href} aria-label={link.name} className="text-secondary-foreground/60 hover:text-primary transition-colors">
                 <link.icon className="h-5 w-5" />
               </Link>
             ))}
