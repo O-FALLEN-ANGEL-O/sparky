@@ -9,22 +9,16 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { orders } from '@/lib/mock-data';
+import { getOrders } from '@/lib/db';
 import type { Order } from '@/lib/mock-data';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useEffect, useState } from 'react';
-
-async function getRecentOrders(): Promise<Order[]> {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    return orders;
-}
 
 export function RecentOrdersTable() {
   const [recentOrders, setRecentOrders] = useState<Order[]>([]);
   
   useEffect(() => {
-    getRecentOrders().then(setRecentOrders);
+    getOrders().then(setRecentOrders);
   }, []);
 
   if (!recentOrders.length) {
