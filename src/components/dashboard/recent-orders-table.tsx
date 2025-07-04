@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Table,
   TableBody,
@@ -10,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { orders } from '@/lib/mock-data';
 import type { Order } from '@/lib/mock-data';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { useEffect, useState } from 'react';
 
 async function getRecentOrders(): Promise<Order[]> {
     // Simulate API delay
@@ -17,8 +20,16 @@ async function getRecentOrders(): Promise<Order[]> {
     return orders;
 }
 
-export async function RecentOrdersTable() {
-    const recentOrders = await getRecentOrders();
+export function RecentOrdersTable() {
+  const [recentOrders, setRecentOrders] = useState<Order[]>([]);
+  
+  useEffect(() => {
+    getRecentOrders().then(setRecentOrders);
+  }, []);
+
+  if (!recentOrders.length) {
+    return <div>Loading orders...</div>
+  }
 
   return (
     <Table>
