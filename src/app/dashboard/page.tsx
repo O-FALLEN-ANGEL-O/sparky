@@ -1,3 +1,6 @@
+'use client';
+
+import * as React from 'react';
 import {
   Card,
   CardContent,
@@ -5,10 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { DollarSign, TrendingUp, Users, Store } from 'lucide-react';
+import { DollarSign, TrendingUp, Users, Store, AlertTriangle } from 'lucide-react';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { RecentOrdersTable } from '@/components/dashboard/recent-orders-table';
+import { Switch } from '@/components/ui/switch';
+import { useToast } from '@/hooks/use-toast';
+import { Separator } from '@/components/ui/separator';
 
 const kpiCards = [
     { title: "Total Sales", value: "$1,250,430.50", description: "+12.5% this month", icon: DollarSign, color: "text-green-500" },
@@ -18,6 +24,21 @@ const kpiCards = [
 ];
 
 export default function DashboardPage() {
+  const [isMaintenance, setIsMaintenance] = React.useState(false);
+  const { toast } = useToast();
+
+  const handleMaintenanceToggle = (checked: boolean) => {
+    setIsMaintenance(checked);
+    toast({
+        title: `Emergency Maintenance ${checked ? 'Enabled' : 'Disabled'}`,
+        description: checked
+            ? 'The system is now in maintenance mode. Public access may be restricted.'
+            : 'The system has returned to normal operation.',
+        variant: checked ? 'destructive' : 'default',
+        duration: 5000,
+    });
+  };
+
   return (
     <div className="space-y-8">
         <div>
@@ -70,6 +91,24 @@ export default function DashboardPage() {
                         <p className="font-semibold text-sm text-yellow-800">⚠️ Low Stock Alert</p>
                         <p className="text-sm text-yellow-700">'Diamond Tennis Bracelet' is running low. Only 7 units left. Reorder soon.</p>
                      </div>
+                </CardContent>
+                <Separator className="my-4" />
+                <CardHeader>
+                    <CardTitle>System Controls</CardTitle>
+                    <CardDescription>High-level system-wide actions.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div className="flex items-center justify-between p-3 border rounded-lg bg-red-50/50 border-destructive/20">
+                        <div>
+                            <h4 className="font-semibold text-destructive flex items-center gap-2"><AlertTriangle className="h-4 w-4" />Emergency Shutdown</h4>
+                            <p className="text-sm text-muted-foreground pl-6">Activate maintenance mode.</p>
+                        </div>
+                        <Switch
+                            checked={isMaintenance}
+                            onCheckedChange={handleMaintenanceToggle}
+                            aria-label="Emergency Shutdown Switch"
+                        />
+                    </div>
                 </CardContent>
             </Card>
         </div>

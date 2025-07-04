@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { 
     LayoutDashboard, ShoppingCart, Package, Users, Settings, 
-    Shield, Briefcase, BarChart3, Download, Globe, UserCog, Factory, LineChart, BrainCircuit, UsersRound, Building2, Truck
+    Shield, Briefcase, BarChart3, Download, Globe, UserCog, Factory, LineChart, BrainCircuit, UsersRound, Building2, Truck, FileText
 } from 'lucide-react';
 import {
   SidebarHeader,
@@ -24,6 +24,8 @@ const navConfig = {
         { href: '/dashboard/analytics', label: 'Revenue & Profit', icon: LineChart },
         { href: '/dashboard/deliveries', label: 'Deliveries', icon: Truck },
         { href: '/dashboard/ai-insights', label: 'AI Insights', icon: BrainCircuit },
+        { href: '/dashboard/security', label: 'Security', icon: Shield },
+        { href: '/dashboard/audit-logs', label: 'Audit Logs', icon: FileText },
         { href: '/dashboard/reports', label: 'Download Reports', icon: Download },
     ],
     admin: [
@@ -32,6 +34,8 @@ const navConfig = {
         { href: '/dashboard/products', label: 'Products', icon: Package },
         { href: '/dashboard/deliveries', label: 'Deliveries', icon: Truck },
         { href: '/dashboard/staff', label: 'Staff', icon: Users },
+        { href: '/dashboard/security', label: 'Security', icon: Shield },
+        { href: '/dashboard/audit-logs', label: 'Audit Logs', icon: FileText },
         { href: '/dashboard/server', label: 'Server Health', icon: Shield },
     ],
     manager: [
