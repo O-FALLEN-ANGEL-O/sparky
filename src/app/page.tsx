@@ -35,14 +35,13 @@ export default function Home() {
           <Image
             src="https://placehold.co/1920x1080.png"
             alt="Hero background"
-            layout="fill"
-            objectFit="cover"
-            className="z-[-1]"
+            fill
+            className="object-cover z-0"
             data-ai-hint="elegant jewelry lifestyle"
             priority
           />
-          <div className="absolute inset-0 bg-black/60 z-[-1]"></div>
-          <div className="container px-4 md:px-6 space-y-6">
+          <div className="absolute inset-0 bg-black/70 z-10"></div>
+          <div className="container relative z-20 px-4 md:px-6 space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline tracking-tight">
               Timeless Elegance, Crafted For You
             </h1>

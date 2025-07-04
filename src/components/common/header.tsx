@@ -21,40 +21,28 @@ const navLinks = [
 
 export default function Header() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const isTransparent = !scrolled;
-
-  const textClass = isTransparent ? 'text-secondary-foreground' : 'text-foreground';
+  // Header is always opaque with a dark background.
+  // Text should be light and icons should be visible against it.
+  const textClass = 'text-secondary-foreground';
   
   const iconButtonClass = cn(
-    'hover:text-primary focus-visible:text-primary transition-colors',
+    'hover:bg-white/10 data-[state=open]:bg-white/10',
     textClass
   );
 
   const outlineButtonClass = cn(
     'transition-colors',
-    isTransparent
-      ? 'border-secondary-foreground/50 hover:bg-secondary-foreground hover:text-secondary'
-      : 'border-border',
+    'border-secondary-foreground/50 hover:bg-secondary-foreground hover:text-secondary',
     textClass
   );
   
   return (
     <header className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300",
-      isTransparent ? "bg-transparent" : "bg-background/80 backdrop-blur-sm border-b"
+      "sticky top-0 z-50 w-full",
+      "bg-secondary" // Always use the dark secondary background
     )}>
       <div className="container flex h-20 items-center">
         <Logo className={textClass} />
