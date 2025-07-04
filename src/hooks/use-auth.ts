@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export type Role = 'employee' | 'manager' | 'hr' | 'admin' | 'shareholder' | 'owner';
+export type Role = 'employee' | 'manager' | 'hr' | 'admin' | 'shareholder' | 'owner' | 'delivery-agent';
 
 export type User = {
   name: string;
@@ -18,6 +18,7 @@ const mockUsers: Record<Role, User> = {
   hr: { name: 'Henry Roberts', email: 'henry@sparkle.com', avatar: 'https://placehold.co/100x100.png', role: 'hr' },
   employee: { name: 'Isla Mae', email: 'isla@sparkle.com', avatar: 'https://placehold.co/100x100.png', role: 'employee' },
   shareholder: { name: 'Julian Croft', email: 'julian@sparkle.com', avatar: 'https://placehold.co/100x100.png', role: 'shareholder' },
+  'delivery-agent': { name: 'Dash Delivero', email: 'dash@sparkle.com', avatar: 'https://placehold.co/100x100.png', role: 'delivery-agent' },
 };
 
 export function useAuth() {

@@ -38,6 +38,86 @@ export type UserRole = {
     lastActivity: string;
 }
 
+export type DeliveryStatus =
+  | 'pending'
+  | 'assigned'
+  | 'accepted'
+  | 'out_for_delivery'
+  | 'delivered'
+  | 'failed';
+
+export type DeliveryAgent = {
+  id: string;
+  name: string;
+  phone: string;
+  avatar: string;
+}
+
+export type Delivery = {
+  id: string;
+  orderId: string;
+  agentId: string;
+  status: DeliveryStatus;
+  customer: {
+    name: string;
+    address: string;
+    phone: string;
+  };
+  otpCode: string;
+  verified: boolean;
+  lastUpdate: string;
+  proofImageUrl?: string;
+}
+
+export const deliveryAgents: DeliveryAgent[] = [
+  { id: 'agent-1', name: 'Alex Ray', phone: '123-456-7890', avatar: 'https://placehold.co/100x100.png' },
+  { id: 'agent-2', name: 'Ben Carter', phone: '234-567-8901', avatar: 'https://placehold.co/100x100.png' },
+]
+
+export const deliveries: Delivery[] = [
+  { 
+    id: 'del-1', 
+    orderId: 'ORD-JKU-001', 
+    agentId: 'agent-1', 
+    status: 'out_for_delivery', 
+    customer: { name: 'Olivia Chen', address: '123 Jade St, Metropolis', phone: '555-0101' }, 
+    otpCode: '123456', 
+    verified: false,
+    lastUpdate: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
+  },
+  { 
+    id: 'del-2', 
+    orderId: 'ORD-JKU-002', 
+    agentId: 'agent-2', 
+    status: 'assigned', 
+    customer: { name: 'Liam Goldberg', address: '456 Ruby Ave, Star City', phone: '555-0102' }, 
+    otpCode: '654321', 
+    verified: false,
+    lastUpdate: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
+  },
+  { 
+    id: 'del-3', 
+    orderId: 'ORD-JKU-003', 
+    agentId: 'agent-1', 
+    status: 'delivered', 
+    customer: { name: 'Sophia Loren', address: '789 Diamond Blvd, Gotham', phone: '555-0103' }, 
+    otpCode: '987654', 
+    verified: true,
+    lastUpdate: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+    proofImageUrl: 'https://placehold.co/600x400.png',
+  },
+  { 
+    id: 'del-4', 
+    orderId: 'ORD-JKU-004', 
+    agentId: 'agent-2', 
+    status: 'failed', 
+    customer: { name: 'Noah Patel', address: '101 Sapphire Ln, Central City', phone: '555-0104' }, 
+    otpCode: '456789', 
+    verified: false,
+    lastUpdate: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+  }
+];
+
 export const products: Product[] = [
   {
     id: '1',

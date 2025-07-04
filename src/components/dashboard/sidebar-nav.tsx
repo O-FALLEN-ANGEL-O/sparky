@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { 
     LayoutDashboard, ShoppingCart, Package, Users, Settings, 
-    Shield, Briefcase, BarChart3, Download, Globe, UserCog, Factory, LineChart, BrainCircuit, UsersRound, Building2
+    Shield, Briefcase, BarChart3, Download, Globe, UserCog, Factory, LineChart, BrainCircuit, UsersRound, Building2, Truck
 } from 'lucide-react';
 import {
   SidebarHeader,
@@ -22,6 +22,7 @@ const navConfig = {
         { href: '/dashboard/roles', label: 'Role Management', icon: UserCog },
         { href: '/dashboard/inventory', label: 'Live Inventory', icon: Factory },
         { href: '/dashboard/analytics', label: 'Revenue & Profit', icon: LineChart },
+        { href: '/dashboard/deliveries', label: 'Deliveries', icon: Truck },
         { href: '/dashboard/ai-insights', label: 'AI Insights', icon: BrainCircuit },
         { href: '/dashboard/reports', label: 'Download Reports', icon: Download },
     ],
@@ -29,6 +30,7 @@ const navConfig = {
         { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
         { href: '/dashboard/orders', label: 'Orders', icon: ShoppingCart },
         { href: '/dashboard/products', label: 'Products', icon: Package },
+        { href: '/dashboard/deliveries', label: 'Deliveries', icon: Truck },
         { href: '/dashboard/staff', label: 'Staff', icon: Users },
         { href: '/dashboard/server', label: 'Server Health', icon: Shield },
     ],
@@ -53,6 +55,10 @@ const navConfig = {
         { href: '/dashboard/top-products', label: 'Top Products', icon: Package },
         { href: '/dashboard/reports', label: 'Monthly Reports', icon: Download },
     ],
+    'delivery-agent': [
+        { href: '/delivery-agent', label: 'My Deliveries', icon: Truck },
+        { href: '/dashboard/settings', label: 'Settings', icon: Settings },
+    ]
 };
 
 const settingsItem = { href: '/dashboard/settings', label: 'Settings', icon: Settings };
