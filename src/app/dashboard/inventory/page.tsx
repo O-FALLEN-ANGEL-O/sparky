@@ -1,5 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Factory } from 'lucide-react';
+import { LiveInventoryTable } from '@/components/dashboard/inventory/live-inventory-table';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function InventoryPage() {
   return (
@@ -15,13 +18,13 @@ export default function InventoryPage() {
         <CardHeader>
           <CardTitle>Inventory Status</CardTitle>
           <CardDescription>
-            This is a placeholder for the live inventory feed. A marquee or live-polling table would be implemented here.
+            This is a live feed of product stock levels. Updates are pushed in real-time.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center justify-center h-64 border-2 border-dashed rounded-lg">
-            <p className="text-muted-foreground">Live Inventory Component</p>
-          </div>
+          <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
+            <LiveInventoryTable />
+          </Suspense>
         </CardContent>
       </Card>
     </div>
