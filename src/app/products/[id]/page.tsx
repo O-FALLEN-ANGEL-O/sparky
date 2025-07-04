@@ -44,7 +44,7 @@ export default async function ProductDetailPage({
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-12 md:py-20">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           <div>
             <ProductImageCarousel images={product.images} alt={product.name} />
           </div>

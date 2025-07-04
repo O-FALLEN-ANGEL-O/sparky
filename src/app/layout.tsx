@@ -3,10 +3,10 @@ import './globals.css';
 import { Providers } from '@/components/providers';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://elegant-treasures.com'),
-  title: 'Sparkle - Fine Jewelry',
+  metadataBase: new URL('https://aura-jewels.com'),
+  title: 'Aura Jewels - Exquisite Indian Jewellery',
   description:
-    'Discover our handcrafted diamond jewelry, where exceptional craftsmanship meets unparalleled elegance.',
+    'Discover authentic, handcrafted Indian jewellery. Timeless designs in gold, diamond, and precious gemstones from Aura Jewels.',
 };
 
 export default function RootLayout({
