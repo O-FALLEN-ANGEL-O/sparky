@@ -22,6 +22,7 @@ export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,15 +56,21 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center justify-end gap-2 md:w-[150px]">
+        <div className="flex items-center justify-end gap-2 md:w-auto">
           <div className={cn(scrolled ? 'text-foreground' : 'text-white')}>
             <AISearch />
           </div>
 
-          <Button variant="ghost" size="icon" className={cn('hover:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')}>
-            <User className="h-5 w-5" />
-            <span className="sr-only">User Profile</span>
-          </Button>
+          {isLoggedIn ? (
+            <Button variant="ghost" size="icon" className={cn('hover:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')}>
+              <User className="h-5 w-5" />
+              <span className="sr-only">User Profile</span>
+            </Button>
+          ) : (
+            <Button asChild variant="outline" className={cn(scrolled ? 'text-primary border-primary/50 hover:bg-primary/10' : 'text-white border-white/50 hover:bg-white/10')}>
+              <Link href="/dashboard">Login</Link>
+            </Button>
+          )}
 
           <Button variant="ghost" size="icon" asChild className={cn('relative hover:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')}>
             <Link href="/cart">
