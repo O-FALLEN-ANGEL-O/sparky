@@ -31,7 +31,7 @@ export default function Home() {
       <Header />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center text-center text-white">
+        <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center text-center text-secondary-foreground">
           <Image
             src="https://placehold.co/1920x1080.png"
             alt="Hero background"
@@ -39,20 +39,21 @@ export default function Home() {
             objectFit="cover"
             className="z-[-1]"
             data-ai-hint="elegant jewelry lifestyle"
+            priority
           />
-          <div className="absolute inset-0 bg-black/50 z-[-1]"></div>
+          <div className="absolute inset-0 bg-black/60 z-[-1]"></div>
           <div className="container px-4 md:px-6 space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline tracking-tight">
               Timeless Elegance, Crafted For You
             </h1>
-            <p className="max-w-[700px] mx-auto text-lg md:text-xl text-white/90">
+            <p className="max-w-[700px] mx-auto text-lg md:text-xl text-secondary-foreground/90">
               Discover our exquisite collection of handcrafted jewelry, where every piece tells a story of beauty, passion, and artisanal excellence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
                 <Link href="#featured-products">Shop Now</Link>
               </Button>
-              <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-black">
+              <Button size="lg" variant="outline" className="bg-transparent border-current text-secondary-foreground hover:bg-secondary-foreground hover:text-secondary">
                 Learn More <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>

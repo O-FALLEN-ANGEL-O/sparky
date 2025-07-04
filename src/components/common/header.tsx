@@ -26,27 +26,38 @@ export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // A small optimization to avoid setting state on initial render if window.scrollY is 0
-    if (typeof window !== 'undefined' && window.scrollY > 10) {
-      setScrolled(true);
-    }
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Use a variable for common icon button classes to avoid repetition
-  const iconButtonClasses = cn(scrolled ? '' : 'text-white hover:bg-white/10 focus-visible:bg-white/10 data-[state=open]:bg-white/10');
+  const isTransparent = !scrolled;
 
+  const textClass = isTransparent ? 'text-secondary-foreground' : 'text-foreground';
+  
+  const iconButtonClass = cn(
+    'hover:text-primary focus-visible:text-primary transition-colors',
+    textClass
+  );
+
+  const outlineButtonClass = cn(
+    'transition-colors',
+    isTransparent
+      ? 'border-secondary-foreground/50 hover:bg-secondary-foreground hover:text-secondary'
+      : 'border-border',
+    textClass
+  );
+  
   return (
     <header className={cn(
       "sticky top-0 z-50 w-full transition-all duration-300",
-      scrolled ? "bg-background/80 backdrop-blur-sm border-b" : "bg-transparent border-b border-transparent"
+      isTransparent ? "bg-transparent" : "bg-background/80 backdrop-blur-sm border-b"
     )}>
       <div className="container flex h-20 items-center">
-        <Logo className={cn(scrolled ? 'text-foreground' : 'text-white')} />
+        <Logo className={textClass} />
         
         <nav className="hidden md:flex flex-1 items-center justify-center gap-6">
           {navLinks.map((link) => (
@@ -55,7 +66,7 @@ export default function Header() {
               href={link.href}
               className={cn(
                 'text-sm font-medium transition-colors hover:text-primary',
-                scrolled ? 'text-foreground' : 'text-white',
+                textClass,
                 pathname === link.href && 'text-primary'
               )}
             >
@@ -65,21 +76,21 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center justify-end gap-2 md:w-auto">
-          <AISearch className={iconButtonClasses} />
-          <ThemeToggle className={iconButtonClasses} />
+          <AISearch className={iconButtonClass} />
+          <ThemeToggle className={iconButtonClass} />
 
           {isLoggedIn ? (
-            <Button variant="ghost" size="icon" className={iconButtonClasses}>
+            <Button variant="ghost" size="icon" className={iconButtonClass}>
               <User className="h-5 w-5" />
               <span className="sr-only">User Profile</span>
             </Button>
           ) : (
-            <Button asChild variant="outline" className={cn(scrolled ? '' : 'text-white border-white/50 hover:bg-white/10')}>
+            <Button asChild variant="outline" className={outlineButtonClass}>
               <Link href="/dashboard">Login</Link>
             </Button>
           )}
 
-          <Button variant="ghost" size="icon" asChild className={cn('relative', iconButtonClasses)}>
+          <Button variant="ghost" size="icon" asChild className={cn('relative', iconButtonClass)}>
             <Link href="/cart">
               <ShoppingCart className="h-5 w-5" />
               <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
@@ -91,7 +102,7 @@ export default function Header() {
 
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className={cn('md:hidden', iconButtonClasses)}>
+              <Button variant="ghost" size="icon" className={cn('md:hidden', iconButtonClass)}>
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
