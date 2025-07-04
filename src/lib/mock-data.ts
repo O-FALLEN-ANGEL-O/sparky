@@ -69,6 +69,46 @@ export type Delivery = {
   proofImageUrl?: string;
 }
 
+export type Job = {
+  id: string;
+  title: string;
+  location: string;
+  type: 'Full-time' | 'Part-time' | 'Contract';
+  department: string;
+  description: string;
+  requirements: string[];
+};
+
+export const jobs: Job[] = [
+  {
+    id: 'job-1',
+    title: 'Senior Frontend Developer',
+    location: 'Remote',
+    type: 'Full-time',
+    department: 'Engineering',
+    description: 'We are looking for an experienced Frontend Developer to join our team. You will be responsible for building the ‘client-side’ of our web applications. You should be able to translate our company and customer needs into functional and appealing interactive applications.',
+    requirements: ['5+ years of experience with React & Next.js', 'Strong proficiency in TypeScript, HTML, and CSS', 'Experience with Tailwind CSS and component libraries like ShadCN UI', 'Familiarity with state management libraries'],
+  },
+  {
+    id: 'job-2',
+    title: 'Jewelry Designer',
+    location: 'New York, NY',
+    type: 'Full-time',
+    department: 'Design',
+    description: 'We are seeking a creative and talented Jewelry Designer to create new and exciting designs for our collections. You will work closely with our production team to bring your visions to life.',
+    requirements: ['Proven experience as a Jewelry Designer', 'Strong portfolio of previous work', 'Proficiency in design software (e.g., Rhino, Matrix)', 'Knowledge of materials and manufacturing processes'],
+  },
+  {
+    id: 'job-3',
+    title: 'Digital Marketing Manager',
+    location: 'Remote',
+    type: 'Full-time',
+    department: 'Marketing',
+    description: 'We are looking for a Digital Marketing Manager to develop, implement, track and optimize our digital marketing campaigns across all digital channels.',
+    requirements: ['Proven working experience in digital marketing', 'Demonstrable experience leading and managing SEO/SEM, marketing database, email, social media and/or display advertising campaigns', 'Highly creative with experience in identifying target audiences and devising digital campaigns that engage, inform and motivate'],
+  },
+];
+
 export const deliveryAgents: DeliveryAgent[] = [
   { id: 'agent-1', name: 'Alex Ray', phone: '123-456-7890', avatar: 'https://placehold.co/100x100.png' },
   { id: 'agent-2', name: 'Ben Carter', phone: '234-567-8901', avatar: 'https://placehold.co/100x100.png' },

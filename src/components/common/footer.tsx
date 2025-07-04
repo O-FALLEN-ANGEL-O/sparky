@@ -15,7 +15,7 @@ const footerLinks = {
     { title: 'Our Story', href: '#' },
     { title: 'Ethical Sourcing', href: '#' },
     { title: 'Press', href: '#' },
-    { title: 'Careers', href: '#' },
+    { title: 'Careers', href: '/careers' },
   ],
   support: [
     { title: 'Contact Us', href: '#' },
