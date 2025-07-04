@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { Star, ShoppingCart } from 'lucide-react';
 import type { Product } from '@/lib/mock-data';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 
 type ProductCardProps = {
   product: Product;
@@ -12,40 +11,29 @@ type ProductCardProps = {
 
 export function ProductCard({ product }: ProductCardProps) {
   return (
-    <Card className="w-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <CardHeader className="p-0">
+    <Card className="w-full overflow-hidden border-0 bg-transparent shadow-none transition-all duration-300 hover:-translate-y-2">
+      <div className="overflow-hidden rounded-lg">
         <Link href={`/products/${product.id}`} className="block">
           <Image
             src={product.images[0]}
             alt={product.name}
             width={400}
             height={400}
-            className="object-cover w-full aspect-square"
+            className="object-cover w-full aspect-square transition-transform duration-500 hover:scale-110"
             data-ai-hint="jewelry piece"
           />
         </Link>
-      </CardHeader>
-      <CardContent className="p-4">
-        <div className="flex justify-between items-start">
-            <CardTitle className="text-lg leading-tight mb-2">
-              <Link href={`/products/${product.id}`} className="hover:text-primary transition-colors">
-                {product.name}
-              </Link>
-            </CardTitle>
-            <Badge variant="secondary">{product.category}</Badge>
-        </div>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <div className="flex items-center gap-0.5">
-            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-            <span>{product.rating.toFixed(1)}</span>
-          </div>
-          <span>&middot;</span>
-          <span>{product.stock} in stock</span>
-        </div>
+      </div>
+      <CardContent className="p-4 text-center">
+        <h3 className="text-lg font-headline">
+          <Link href={`/products/${product.id}`} className="hover:text-primary transition-colors">
+            {product.name}
+          </Link>
+        </h3>
+        <p className="text-xl font-semibold text-primary mt-1">${product.price.toFixed(2)}</p>
       </CardContent>
-      <CardFooter className="p-4 flex justify-between items-center">
-        <p className="text-xl font-semibold">${product.price.toFixed(2)}</p>
-        <Button size="sm">
+      <CardFooter className="p-0">
+        <Button size="lg" className="w-full">
           <ShoppingCart className="mr-2 h-4 w-4" />
           Add to Cart
         </Button>

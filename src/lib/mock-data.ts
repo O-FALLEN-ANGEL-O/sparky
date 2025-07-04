@@ -23,6 +23,12 @@ export type Order = {
   total: number;
 };
 
+export type Testimonial = {
+  name: string;
+  avatar: string;
+  quote: string;
+};
+
 export const products: Product[] = [
   {
     id: '1',
@@ -190,5 +196,23 @@ export const orders: Order[] = [
     {
         product: products[2],
         quantity: 1,
+    }
+  ];
+
+  export const testimonials: Testimonial[] = [
+    {
+      name: 'Emily Carter',
+      avatar: 'https://placehold.co/100x100.png',
+      quote: "The ring I purchased is absolutely breathtaking. The craftsmanship is top-notch, and it sparkles from every angle. I couldn't be happier!"
+    },
+    {
+      name: 'James Rodriguez',
+      avatar: 'https://placehold.co/100x100.png',
+      quote: 'Exceptional service and an even more exceptional product. The necklace I bought for my wife was a huge hit. Thank you, Sparkle!'
+    },
+    {
+      name: 'Sophia Chen',
+      avatar: 'https://placehold.co/100x100.png',
+      quote: "I'm in love with my new bracelet! It's so elegant and delicate. The entire process from browsing to delivery was seamless."
     }
   ];

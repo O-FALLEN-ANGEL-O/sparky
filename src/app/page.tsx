@@ -5,86 +5,105 @@ import ProductGrid from '@/components/products/product-grid';
 import { ProductCardSkeleton } from '@/components/products/product-card-skeleton';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Star, Award, ShieldCheck, Truck, HeartHandshake } from 'lucide-react';
 import Link from 'next/link';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { testimonials } from '@/lib/mock-data';
+import { Input } from '@/components/ui/input';
+
+const collections = [
+  { name: 'Rings Collection', href: '#', image: 'https://placehold.co/400x500.png', hint: 'rings collection' },
+  { name: 'Necklaces Collection', href: '#', image: 'https://placehold.co/400x500.png', hint: 'necklaces collection' },
+  { name: 'Bracelets Collection', href: '#', image: 'https://placehold.co/400x500.png', hint: 'bracelets collection' },
+  { name: 'Earrings Collection', href: '#', image: 'https://placehold.co/400x500.png', hint: 'earrings collection' },
+];
+
+const features = [
+  { icon: Award, title: 'Master Craftsmanship', description: 'Timeless designs, expertly crafted to last a lifetime.' },
+  { icon: ShieldCheck, title: 'Ethically Sourced', description: '100% conflict-free diamonds and recycled precious metals.' },
+  { icon: Truck, title: 'Insured Shipping', description: 'Free, fast, and secure delivery right to your doorstep.' },
+  { icon: HeartHandshake, title: 'Lifetime Warranty', description: 'We stand behind our quality with a lifetime guarantee.' },
+]
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
       <main className="flex-grow">
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:items-center">
-              <div className="flex flex-col justify-center space-y-6">
-                <div className="inline-block rounded-full bg-accent text-accent-foreground px-4 py-1 text-sm font-medium self-start">
-                  Exquisite Diamond Collection
-                </div>
-                <div className="space-y-4">
-                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none font-headline">
-                    Timeless Beauty
-                    <br />
-                    <span className="text-primary">Captured in Diamonds</span>
-                  </h1>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Discover our handcrafted diamond jewelry, where exceptional
-                    craftsmanship meets unparalleled elegance. Each piece tells
-                    a unique story of beauty and passion.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-4 min-[400px]:flex-row items-center">
-                  <Button size="lg" asChild>
-                    <Link href="#new-arrivals">Explore Collection</Link>
-                  </Button>
-                  <Button size="lg" variant="link" asChild>
-                    <Link href="#">
-                      Our Story <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-              <div className="relative mt-8 lg:mt-0">
-                <Image
-                  src="https://placehold.co/600x600.png"
-                  width={600}
-                  height={600}
-                  alt="Diamond Ring"
-                  data-ai-hint="diamond ring"
-                  className="mx-auto aspect-square overflow-hidden rounded-full object-cover sm:w-full"
-                />
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-max bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-lg flex items-center gap-3">
-                    <ShieldCheck className="w-6 h-6 text-green-600" />
-                    <div>
-                        <p className="font-semibold">Ethically Sourced</p>
-                        <p className="text-sm text-muted-foreground">100% Conflict-Free Diamonds</p>
-                    </div>
-                </div>
-              </div>
+        {/* Hero Section */}
+        <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center text-center text-white">
+          <Image
+            src="https://placehold.co/1920x1080.png"
+            alt="Hero background"
+            layout="fill"
+            objectFit="cover"
+            className="z-[-1]"
+            data-ai-hint="elegant jewelry lifestyle"
+          />
+          <div className="absolute inset-0 bg-black/50 z-[-1]"></div>
+          <div className="container px-4 md:px-6 space-y-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline tracking-tight">
+              Timeless Elegance, Crafted For You
+            </h1>
+            <p className="max-w-[700px] mx-auto text-lg md:text-xl text-white/90">
+              Discover our exquisite collection of handcrafted jewelry, where every piece tells a story of beauty, passion, and artisanal excellence.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" asChild>
+                <Link href="#featured-products">Shop Now</Link>
+              </Button>
+              <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-black">
+                Learn More <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
             </div>
           </div>
         </section>
 
-        <section id="new-arrivals" className="w-full py-12 md:py-24 lg:py-32 bg-secondary/50">
+        {/* Collections Section */}
+        <section id="collections" className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-background px-3 py-1 text-sm">
-                  New Arrivals
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
-                  Shine with Our Latest Designs
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  From timeless classics to modern statements, find the perfect
-                  piece that tells your story.
-                </p>
-              </div>
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl sm:text-4xl font-headline text-primary">Our Collections</h2>
+              <p className="max-w-[600px] mx-auto text-muted-foreground md:text-lg">
+                Explore our curated collections, each with a unique inspiration and story.
+              </p>
             </div>
-            <div className="mx-auto max-w-7xl pt-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {collections.map((collection) => (
+                <Link key={collection.name} href={collection.href} className="group relative block overflow-hidden rounded-lg">
+                  <Image
+                    src={collection.image}
+                    alt={collection.name}
+                    width={400}
+                    height={500}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    data-ai-hint={collection.hint}
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <h3 className="text-2xl font-headline text-white text-center">{collection.name}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Products Section */}
+        <section id="featured-products" className="w-full py-12 md:py-24 lg:py-32 bg-accent">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-primary">
+                Featured Products
+              </h2>
+              <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                From timeless classics to modern statements, find the perfect piece that tells your story.
+              </p>
+            </div>
+            <div className="mx-auto max-w-7xl">
               <Suspense
                 fallback={
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                    {Array.from({ length: 8 }).map((_, i) => (
+                    {Array.from({ length: 4 }).map((_, i) => (
                       <ProductCardSkeleton key={i} />
                     ))}
                   </div>
@@ -95,6 +114,70 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Why Choose Us Section */}
+        <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl sm:text-4xl font-headline text-primary">Why Choose Sparkle</h2>
+              <p className="max-w-[600px] mx-auto text-muted-foreground md:text-lg">
+                We are dedicated to providing you with an exceptional experience.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+              {features.map((feature) => (
+                <div key={feature.title} className="flex flex-col items-center space-y-3">
+                  <div className="bg-accent p-4 rounded-full">
+                    <feature.icon className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-headline">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary text-secondary-foreground">
+          <div className="container px-4 md:px-6">
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl sm:text-4xl font-headline text-primary">What Our Customers Say</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial) => (
+                <div key={testimonial.name} className="bg-background/10 p-6 rounded-lg flex flex-col items-center text-center">
+                  <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
+                    <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                    <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex gap-0.5 mb-2">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-primary fill-primary" />)}
+                  </div>
+                  <p className="text-lg italic mb-4">&quot;{testimonial.quote}&quot;</p>
+                  <p className="font-semibold font-headline text-lg">{testimonial.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Newsletter CTA Section */}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-accent">
+            <div className="container px-4 md:px-6">
+                <div className="max-w-2xl mx-auto text-center space-y-4">
+                    <h2 className="text-3xl sm:text-4xl font-headline text-primary">Join Our Exclusive Circle</h2>
+                    <p className="text-muted-foreground md:text-lg">
+                        Be the first to know about new collections, special events, and exclusive offers.
+                    </p>
+                    <form className="flex gap-2 max-w-md mx-auto">
+                        <Input placeholder="Enter your email" type="email" className="flex-1"/>
+                        <Button type="submit">Subscribe</Button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
       </main>
       <Footer />
     </div>

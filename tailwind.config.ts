@@ -8,10 +8,17 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     extend: {
       fontFamily: {
-        body: ['"Inter"', 'sans-serif'],
-        headline: ['"Playfair Display"', 'serif'],
+        body: ['"Poppins"', 'sans-serif'],
+        headline: ['"Cormorant Garamond"', 'serif'],
         code: ['monospace'],
       },
       colors: {

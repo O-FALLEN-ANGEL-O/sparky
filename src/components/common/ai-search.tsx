@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/popover';
 import { aiSmartSearch } from '@/ai/flows/ai-smart-search';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   query: z.string().min(3, 'Search query must be at least 3 characters.'),
@@ -38,9 +39,7 @@ export function AISearch() {
     try {
       const response = await aiSmartSearch({ query: values.query });
       setResults(response.results);
-      if (response.results.length > 0) {
-        setOpen(true);
-      } else {
+      if (response.results.length === 0) {
         toast({
             title: 'No Results Found',
             description: "Your AI search didn't return any products.",
@@ -61,20 +60,25 @@ export function AISearch() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <div className="relative w-full">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2">
+        <Button variant="ghost" size="icon" className="hover:bg-white/10 data-[state=open]:bg-white/10">
+            <Search className="h-5 w-5" />
+            <span className="sr-only">Open AI Search</span>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-80 p-0">
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="p-4 space-y-4">
+              <h4 className="font-medium leading-none">AI Smart Search</h4>
+              <p className="text-sm text-muted-foreground">Describe the jewelry you're looking for.</p>
               <FormField
                 control={form.control}
                 name="query"
                 render={({ field }) => (
-                  <FormItem className="flex-1">
+                  <FormItem>
                     <FormControl>
                       <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                         <Input
-                          placeholder="AI Smart Search..."
-                          className="pl-10"
+                          placeholder="e.g., a gold necklace with a small diamond"
                           {...field}
                         />
                       </div>
@@ -82,37 +86,33 @@ export function AISearch() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" size="icon" disabled={loading} aria-label="Search">
+              <Button type="submit" disabled={loading} className="w-full">
                 {loading ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
-                  <Search className="h-4 w-4" />
+                  <>
+                    <Search className="h-4 w-4 mr-2" />
+                    Search
+                  </>
                 )}
               </Button>
             </form>
           </Form>
-        </div>
-      </PopoverTrigger>
-      <PopoverContent className="w-[--radix-popover-trigger-width] max-h-[--radix-popover-content-available-height]">
-        <div className="p-4">
-          <h4 className="font-medium leading-none mb-4">Search Results</h4>
-          {results.length > 0 ? (
-            <ul className="grid gap-2">
-              {results.map((item, index) => (
-                <li
-                  key={index}
-                  className="text-sm p-2 hover:bg-accent rounded-md"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-sm text-muted-foreground">
-              No products found matching your search.
-            </p>
-          )}
-        </div>
+        {results.length > 0 && (
+             <div className="p-4 border-t">
+                <h4 className="font-medium leading-none mb-4">Search Results</h4>
+                <ul className="grid gap-2">
+                {results.map((item, index) => (
+                    <li
+                    key={index}
+                    className="text-sm p-2 hover:bg-accent rounded-md"
+                    >
+                    {item}
+                    </li>
+                ))}
+                </ul>
+            </div>
+        )}
       </PopoverContent>
     </Popover>
   );
