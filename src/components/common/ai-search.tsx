@@ -22,7 +22,7 @@ const formSchema = z.object({
   query: z.string().min(3, 'Search query must be at least 3 characters.'),
 });
 
-export function AISearch() {
+export function AISearch({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<string[]>([]);
@@ -60,7 +60,7 @@ export function AISearch() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon" className="hover:bg-white/10 data-[state=open]:bg-white/10">
+        <Button variant="ghost" size="icon" className={cn("hover:bg-white/10 data-[state=open]:bg-white/10", className)}>
             <Search className="h-5 w-5" />
             <span className="sr-only">Open AI Search</span>
         </Button>

@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ShoppingCart, Menu, User, Search } from 'lucide-react';
+import { ShoppingCart, Menu, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Logo } from '../logo';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import { AISearch } from './ai-search';
+import { ThemeToggle } from './theme-toggle';
 
 const navLinks = [
   { href: '/#collections', label: 'Collections' },
@@ -57,9 +58,8 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center justify-end gap-2 md:w-auto">
-          <div className={cn(scrolled ? 'text-foreground' : 'text-white')}>
-            <AISearch />
-          </div>
+          <AISearch className={cn('hover:bg-white/10 data-[state=open]:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')} />
+          <ThemeToggle className={cn('hover:bg-white/10 data-[state=open]:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')} />
 
           {isLoggedIn ? (
             <Button variant="ghost" size="icon" className={cn('hover:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')}>
