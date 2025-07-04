@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { ShoppingCart, Menu, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -45,10 +45,42 @@ export default function Header() {
       "sticky top-0 z-50 w-full",
       "bg-secondary" // Always use the dark secondary background
     )}>
-      <div className="container flex h-20 items-center">
-        <Logo className={textClass} />
-        
-        <nav className="hidden md:flex flex-1 items-center justify-center gap-6">
+      <div className="container flex h-20 items-center justify-between">
+        {/* Left Side */}
+        <div className="flex flex-1 items-center justify-start gap-4">
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className={cn('md:hidden', iconButtonClass)}>
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="bg-background w-3/4 sm:max-w-xs">
+              <nav className="flex flex-col gap-6 text-lg font-medium mt-8">
+                <Logo />
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsSheetOpen(false)}
+                    className={cn(
+                      'transition-colors hover:text-primary',
+                      pathname === link.href ? 'text-primary' : 'text-foreground'
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
+          <div className="hidden md:block">
+            <Logo className={textClass} />
+          </div>
+        </div>
+
+        {/* Centered Navigation (Desktop) */}
+        <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -63,10 +95,18 @@ export default function Header() {
             </Link>
           ))}
         </nav>
+        
+        {/* Mobile Logo */}
+        <div className="md:hidden">
+           <Logo className={textClass} />
+        </div>
 
-        <div className="flex items-center justify-end gap-2 md:w-auto">
-          <AISearch className={iconButtonClass} />
-          <ThemeToggle className={iconButtonClass} />
+        {/* Right Side */}
+        <div className="flex flex-1 items-center justify-end gap-2">
+          <div className="hidden md:flex">
+            <AISearch className={iconButtonClass} />
+            <ThemeToggle className={iconButtonClass} />
+          </div>
 
           {isLoggedIn ? (
             <Button variant="ghost" size="icon" className={iconButtonClass}>
@@ -88,33 +128,6 @@ export default function Header() {
               <span className="sr-only">Shopping Cart</span>
             </Link>
           </Button>
-
-          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className={cn('md:hidden', iconButtonClass)}>
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="bg-background">
-              <nav className="flex flex-col gap-6 text-lg font-medium mt-8">
-                <Logo />
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsSheetOpen(false)}
-                    className={cn(
-                      'transition-colors hover:text-primary',
-                      pathname === link.href ? 'text-primary' : 'text-foreground'
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
         </div>
       </div>
     </header>
