@@ -9,9 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { employeeLeaveBalance } from "@/lib/mock-data"
+import { type LeaveBalance } from "@/lib/mock-data"
 
-export function LeaveBalanceChart() {
+type LeaveBalanceChartProps = {
+    data: LeaveBalance[];
+}
+
+export function LeaveBalanceChart({ data }: LeaveBalanceChartProps) {
   return (
     <Card>
       <CardHeader>
@@ -22,7 +26,7 @@ export function LeaveBalanceChart() {
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                     <Pie
-                        data={employeeLeaveBalance}
+                        data={data}
                         cx="50%"
                         cy="50%"
                         innerRadius={60}
@@ -32,7 +36,7 @@ export function LeaveBalanceChart() {
                         dataKey="value"
                         label={({ name, value }) => `${name}: ${value}`}
                     >
-                        {employeeLeaveBalance.map((entry, index) => (
+                        {data.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                     </Pie>

@@ -10,20 +10,35 @@ import {
     TableHeader,
     TableRow,
   } from '@/components/ui/table';
-import { products as initialProducts } from '@/lib/mock-data';
+import { getProducts } from '@/lib/db';
 import type { Product } from '@/lib/mock-data';
 import { StockStatusBadge } from './stock-status-badge';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function LiveInventoryTable() {
-    const [inventory, setInventory] = useState<Product[]>(initialProducts);
+    const [inventory, setInventory] = useState<Product[]>([]);
     const [updatedRow, setUpdatedRow] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const fetchInventory = async () => {
+            const initialInventory = await getProducts();
+            setInventory(initialInventory);
+            setLoading(false);
+        }
+        fetchInventory();
+    }, []);
+
+    useEffect(() => {
+        if (loading) return;
+
         const interval = setInterval(() => {
             setInventory(prevInventory => {
                 const newInventory = [...prevInventory];
+                if (newInventory.length === 0) return newInventory;
+
                 const randomIndex = Math.floor(Math.random() * newInventory.length);
                 const productToUpdate = { ...newInventory[randomIndex] };
                 
@@ -42,7 +57,18 @@ export function LiveInventoryTable() {
         }, 3000); // Update every 3 seconds
 
         return () => clearInterval(interval);
-    }, []);
+    }, [loading]);
+
+    if (loading) {
+        return (
+            <div className="space-y-2">
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+            </div>
+        )
+    }
 
     return (
         <Table>

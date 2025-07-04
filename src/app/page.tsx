@@ -8,7 +8,8 @@ import Image from 'next/image';
 import { ArrowRight, Star, Award, ShieldCheck, Truck, HeartHandshake } from 'lucide-react';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { testimonials } from '@/lib/mock-data';
+import { getTestimonials } from '@/lib/db';
+import type { Testimonial } from '@/lib/mock-data';
 import { Input } from '@/components/ui/input';
 
 const collections = [
@@ -24,6 +25,34 @@ const features = [
   { icon: Truck, title: 'Insured Shipping', description: 'Free, fast, and secure delivery right to your doorstep.' },
   { icon: HeartHandshake, title: 'Lifetime Warranty', description: 'We stand behind our quality with a lifetime guarantee.' },
 ]
+
+async function TestimonialsSection() {
+  const testimonials = await getTestimonials();
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary text-secondary-foreground">
+      <div className="container px-4 md:px-6">
+        <div className="text-center space-y-4 mb-12">
+          <h2 className="text-3xl sm:text-4xl font-headline text-primary">What Our Customers Say</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {testimonials.map((testimonial: Testimonial) => (
+            <div key={testimonial.name} className="bg-background/10 p-6 rounded-lg flex flex-col items-center text-center">
+              <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
+                <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+              </Avatar>
+              <div className="flex gap-0.5 mb-2">
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-primary fill-primary" />)}
+              </div>
+              <p className="text-lg italic mb-4">&quot;{testimonial.quote}&quot;</p>
+              <p className="font-semibold font-headline text-lg">{testimonial.name}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
 
 export default function Home() {
   return (
@@ -52,7 +81,7 @@ export default function Home() {
               <Button size="lg" asChild>
                 <Link href="#featured-products">Shop Now</Link>
               </Button>
-              <Button size="lg" variant="outline" className="bg-transparent border-current text-secondary-foreground hover:bg-secondary-foreground hover:text-secondary">
+              <Button size="lg" variant="outline" className="bg-transparent border-secondary-foreground/50 hover:bg-secondary-foreground hover:text-secondary text-secondary-foreground">
                 Learn More <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -138,29 +167,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary text-secondary-foreground">
-          <div className="container px-4 md:px-6">
-            <div className="text-center space-y-4 mb-12">
-              <h2 className="text-3xl sm:text-4xl font-headline text-primary">What Our Customers Say</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.name} className="bg-background/10 p-6 rounded-lg flex flex-col items-center text-center">
-                  <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
-                    <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                    <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex gap-0.5 mb-2">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-primary fill-primary" />)}
-                  </div>
-                  <p className="text-lg italic mb-4">&quot;{testimonial.quote}&quot;</p>
-                  <p className="font-semibold font-headline text-lg">{testimonial.name}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <TestimonialsSection />
         
         {/* Newsletter CTA Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-accent">

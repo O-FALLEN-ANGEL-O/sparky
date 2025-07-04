@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { deliveries } from '@/lib/mock-data';
+import { getDeliveries } from '@/lib/db';
 import type { Delivery } from '@/lib/mock-data';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,9 +7,8 @@ import { DeliveryStatusBadge } from '@/components/delivery/delivery-status-badge
 import { MapPin, Phone, ArrowRight } from 'lucide-react';
 
 async function getAgentTasks(agentId: string): Promise<Delivery[]> {
-  // Simulate API delay and filtering
-  await new Promise(resolve => setTimeout(resolve, 500));
-  return deliveries.filter(d => d.agentId === agentId && d.status !== 'delivered' && d.status !== 'failed');
+  const allDeliveries = await getDeliveries();
+  return allDeliveries.filter(d => d.agentId === agentId && d.status !== 'delivered' && d.status !== 'failed');
 }
 
 export default async function DeliveryAgentDashboard() {

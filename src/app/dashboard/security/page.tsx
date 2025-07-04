@@ -1,11 +1,13 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Shield } from 'lucide-react';
-import { userRoles } from '@/lib/mock-data';
+import { getUserRoles } from '@/lib/db';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { RiskScoreBadge } from '@/components/dashboard/security/risk-score-badge';
 
-export default function SecurityPage() {
+export default async function SecurityPage() {
+  const userRoles = await getUserRoles();
+
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">

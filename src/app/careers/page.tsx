@@ -1,6 +1,6 @@
 import Header from '@/components/common/header';
 import Footer from '@/components/common/footer';
-import { jobs } from '@/lib/mock-data';
+import { getJobs } from '@/lib/db';
 import type { Job } from '@/lib/mock-data';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,7 +8,9 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, MapPin, Briefcase, Building } from 'lucide-react';
 import Image from 'next/image';
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const jobs = await getJobs();
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />

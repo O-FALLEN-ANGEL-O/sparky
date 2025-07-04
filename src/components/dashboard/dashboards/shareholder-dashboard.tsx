@@ -1,15 +1,51 @@
 'use client';
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { RevenueChart } from "../owner/revenue-chart";
-import { PayrollChart } from "../charts/payroll-chart"; // Using as Top Stores chart
+import { PayrollChart } from "../charts/payroll-chart";
 import { InventoryPieChart } from "../charts/inventory-pie-chart";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { products } from "@/lib/mock-data";
+import { getProducts, getPayrollData } from "@/lib/db";
+import type { Product, Payroll } from "@/lib/mock-data";
 import Image from "next/image";
+import { Skeleton } from "@/components/ui/skeleton";
+
+function DashboardSkeleton() {
+    return (
+        <div className="space-y-6">
+            <Skeleton className="h-10 w-1/2" />
+             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card><CardHeader><Skeleton className="h-6 w-1/2" /></CardHeader><CardContent><Skeleton className="h-48 w-full" /></CardContent></Card>
+                <Card><CardHeader><Skeleton className="h-6 w-1/2" /></CardHeader><CardContent><Skeleton className="h-48 w-full" /></CardContent></Card>
+            </div>
+        </div>
+    )
+}
 
 export function ShareholderDashboard() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [payrollData, setPayrollData] = useState<Payroll[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+        const [productsData, payroll] = await Promise.all([
+            getProducts(),
+            getPayrollData()
+        ]);
+        setProducts(productsData);
+        setPayrollData(payroll);
+        setLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  if (loading) {
+      return <DashboardSkeleton />;
+  }
+  
   return (
     <div className="space-y-6">
       <div>
@@ -33,7 +69,7 @@ export function ShareholderDashboard() {
                 <CardDescription>Revenue by store location.</CardDescription>
             </CardHeader>
             <CardContent>
-                <PayrollChart />
+                <PayrollChart data={payrollData} />
             </CardContent>
         </Card>
       </div>

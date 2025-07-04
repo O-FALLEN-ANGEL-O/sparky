@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Plus, Minus, X } from 'lucide-react';
-import { cartItems as initialCartItems } from '@/lib/mock-data';
+import { getCartItems } from '@/lib/db';
 import type { Product } from '@/lib/mock-data';
 import Header from '@/components/common/header';
 import Footer from '@/components/common/footer';
@@ -26,7 +26,7 @@ type CartItem = {
 };
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
+  const [cartItems, setCartItems] = useState<CartItem[]>(getCartItems());
 
   const updateQuantity = (productId: string, newQuantity: number) => {
     if (newQuantity < 1) {

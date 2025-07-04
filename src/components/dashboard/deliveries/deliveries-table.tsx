@@ -6,7 +6,7 @@ import {
     TableHeader,
     TableRow,
   } from '@/components/ui/table';
-import { deliveryAgents, deliveries } from '@/lib/mock-data';
+import { getDeliveries, getDeliveryAgents } from '@/lib/db';
 import type { Delivery, DeliveryAgent } from '@/lib/mock-data';
 import { MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,17 +14,14 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { DeliveryStatusBadge } from '@/components/delivery/delivery-status-badge';
 import { formatDistanceToNow } from 'date-fns';
 
-async function getData(): Promise<{ deliveries: Delivery[], agents: DeliveryAgent[] }> {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-    return { deliveries, agents: deliveryAgents };
-}
-
 export async function DeliveriesTable() {
-    const { deliveries, agents } = await getData();
+    const [deliveries, agents] = await Promise.all([
+        getDeliveries(),
+        getDeliveryAgents()
+    ]);
 
     const getAgentName = (agentId: string) => {
-        return agents.find(agent => agent.id === agentId)?.name || 'Unassigned';
+        return agents.find((agent: DeliveryAgent) => agent.id === agentId)?.name || 'Unassigned';
     }
 
     return (

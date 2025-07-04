@@ -1,4 +1,4 @@
-import { products } from '@/lib/mock-data';
+import { getProductById } from '@/lib/db';
 import type { Product } from '@/lib/mock-data';
 import Header from '@/components/common/header';
 import Footer from '@/components/common/footer';
@@ -23,18 +23,12 @@ const Dynamic3DViewer = dynamic(
   }
 );
 
-
-async function getProduct(id: string): Promise<Product | undefined> {
-  // Simulate API call
-  return products.find((p) => p.id === id);
-}
-
 export default async function ProductDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const product = await getProduct(params.id);
+  const product = await getProductById(params.id);
 
   if (!product) {
     notFound();

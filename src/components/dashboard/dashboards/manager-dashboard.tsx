@@ -1,14 +1,53 @@
 'use client';
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { PlusCircle, Check, X, MessageSquare } from "lucide-react";
-import { teamMembers, leaveRequests } from "@/lib/mock-data";
+import { getTeamMembers, getLeaveRequests, getTeamTaskData } from "@/lib/db";
+import type { TeamMember, LeaveRequest, TeamTask } from "@/lib/mock-data";
 import { TaskTrackerChart } from "../charts/task-tracker-chart";
-import { RevenueChart } from "../owner/revenue-chart"; // Placeholder for performance chart
+import { RevenueChart } from "../owner/revenue-chart";
+import { Skeleton } from "@/components/ui/skeleton";
+
+function DashboardSkeleton() {
+    return (
+        <div className="space-y-6">
+            <Skeleton className="h-10 w-1/2" />
+             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card><CardHeader><Skeleton className="h-6 w-1/2" /></CardHeader><CardContent><Skeleton className="h-48 w-full" /></CardContent></Card>
+                <Card><CardHeader><Skeleton className="h-6 w-1/2" /></CardHeader><CardContent><Skeleton className="h-48 w-full" /></CardContent></Card>
+            </div>
+        </div>
+    )
+}
 
 export function ManagerDashboard() {
+  const [team, setTeam] = useState<TeamMember[]>([]);
+  const [requests, setRequests] = useState<LeaveRequest[]>([]);
+  const [taskData, setTaskData] = useState<TeamTask[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+        const [teamData, requestsData, tasks] = await Promise.all([
+            getTeamMembers(),
+            getLeaveRequests(),
+            getTeamTaskData()
+        ]);
+        setTeam(teamData);
+        setRequests(requestsData);
+        setTaskData(tasks);
+        setLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  if (loading) {
+      return <DashboardSkeleton />;
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -23,7 +62,7 @@ export function ManagerDashboard() {
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <TaskTrackerChart />
+        <TaskTrackerChart data={taskData} />
         <Card>
             <CardHeader>
                 <CardTitle>Team Performance</CardTitle>
@@ -42,7 +81,7 @@ export function ManagerDashboard() {
                 <CardDescription>Your direct reports and their current status.</CardDescription>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {teamMembers.map(member => (
+                {team.map(member => (
                     <div key={member.id} className="flex items-center justify-between p-3 border rounded-lg">
                         <div className="flex items-center gap-3">
                             <Avatar>
@@ -67,7 +106,7 @@ export function ManagerDashboard() {
                 <CardDescription>Review and approve leave requests.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-                {leaveRequests.map(req => (
+                {requests.map(req => (
                     <div key={req.id} className="p-3 border rounded-lg">
                         <div className="flex items-center justify-between">
                             <p className="font-semibold">{req.employeeName}</p>

@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend } from "recharts"
@@ -9,9 +10,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { teamTaskData } from "@/lib/mock-data"
+import { type TeamTask } from "@/lib/mock-data"
 
-export function TaskTrackerChart() {
+type TaskTrackerChartProps = {
+    data: TeamTask[];
+}
+
+export function TaskTrackerChart({ data }: TaskTrackerChartProps) {
   return (
     <Card>
       <CardHeader>
@@ -21,7 +26,7 @@ export function TaskTrackerChart() {
       <CardContent>
         <div className="w-full h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={teamTaskData} layout="vertical">
+                <BarChart data={data} layout="vertical">
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis type="number" />
                     <YAxis dataKey="name" type="category" width={80} />

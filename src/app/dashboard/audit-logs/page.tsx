@@ -1,10 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { FileText } from 'lucide-react';
-import { auditLogs } from '@/lib/mock-data';
+import { getAuditLogs } from '@/lib/db';
 import { Badge } from '@/components/ui/badge';
 
-export default function AuditLogsPage() {
+export default async function AuditLogsPage() {
+  const auditLogs = await getAuditLogs();
+
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">

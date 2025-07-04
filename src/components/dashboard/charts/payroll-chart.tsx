@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Bar, BarChart, CartesianGrid, XAxis, ResponsiveContainer, Tooltip } from "recharts"
@@ -9,9 +10,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { payrollData } from "@/lib/mock-data"
+import { type Payroll } from "@/lib/mock-data"
 
-export function PayrollChart() {
+type PayrollChartProps = {
+    data: Payroll[];
+}
+
+export function PayrollChart({ data }: PayrollChartProps) {
   return (
     <Card>
       <CardHeader>
@@ -21,7 +26,7 @@ export function PayrollChart() {
       <CardContent>
         <div className="w-full h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={payrollData}>
+                <BarChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month" />
                     <Tooltip

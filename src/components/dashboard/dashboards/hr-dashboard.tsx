@@ -1,17 +1,54 @@
 'use client';
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { hrOnboardingTasks, userRoles } from "@/lib/mock-data";
+import { getHrOnboardingTasks, getUserRoles, getPayrollData } from "@/lib/db";
+import type { HrOnboardingTask, UserRole, Payroll } from "@/lib/mock-data";
 import { PlusCircle, FileUp, Search } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PayrollChart } from "../charts/payroll-chart";
+import { Skeleton } from "@/components/ui/skeleton";
+
+function DashboardSkeleton() {
+    return (
+        <div className="space-y-6">
+            <Skeleton className="h-10 w-1/2" />
+             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card><CardHeader><Skeleton className="h-6 w-1/2" /></CardHeader><CardContent><Skeleton className="h-48 w-full" /></CardContent></Card>
+                <Card><CardHeader><Skeleton className="h-6 w-1/2" /></CardHeader><CardContent className="space-y-2"><Skeleton className="h-8 w-full" /><Skeleton className="h-8 w-full" /><Skeleton className="h-8 w-full" /></CardContent></Card>
+            </div>
+        </div>
+    )
+}
 
 export function HRDashboard() {
-  const employees = userRoles.filter(u => u.role !== 'Owner');
+  const [onboardingTasks, setOnboardingTasks] = useState<HrOnboardingTask[]>([]);
+  const [employees, setEmployees] = useState<UserRole[]>([]);
+  const [payrollData, setPayrollData] = useState<Payroll[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      const fetchData = async () => {
+          const [tasks, users, payroll] = await Promise.all([
+              getHrOnboardingTasks(),
+              getUserRoles(),
+              getPayrollData()
+          ]);
+          setOnboardingTasks(tasks);
+          setEmployees(users.filter(u => u.role !== 'Owner'));
+          setPayrollData(payroll);
+          setLoading(false);
+      }
+      fetchData();
+  }, []);
+
+  if (loading) {
+      return <DashboardSkeleton />;
+  }
 
   return (
     <div className="space-y-6">
@@ -27,14 +64,14 @@ export function HRDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <PayrollChart />
+        <PayrollChart data={payrollData} />
         <Card>
             <CardHeader>
                 <CardTitle>Onboarding Progress</CardTitle>
                 <CardDescription>Status of new joinee, Alex Ray.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-                {hrOnboardingTasks.map(task => (
+                {onboardingTasks.map(task => (
                     <div key={task.id} className="flex items-center gap-3 p-2 border rounded-md">
                         <Checkbox defaultChecked={task.completed} />
                         <label className="text-sm font-medium">{task.task}</label>

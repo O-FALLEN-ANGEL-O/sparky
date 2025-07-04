@@ -1,13 +1,50 @@
 'use client';
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Cpu, HardDrive, MemoryStick, AlertTriangle, ShieldCheck, Server, ToggleRight, FileText } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
-import { securityAlerts, userRoles } from "@/lib/mock-data";
+import { getSecurityAlerts, getUserRoles } from "@/lib/db";
+import type { SecurityAlert, UserRole } from "@/lib/mock-data";
+import { Skeleton } from "@/components/ui/skeleton";
+
+function DashboardSkeleton() {
+    return (
+        <div className="space-y-6">
+            <Skeleton className="h-10 w-1/2" />
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <Card><CardHeader><Skeleton className="h-6 w-1/2" /></CardHeader><CardContent><Skeleton className="h-8 w-1/4" /><Skeleton className="h-2 w-full mt-2" /></CardContent></Card>
+                <Card><CardHeader><Skeleton className="h-6 w-1/2" /></CardHeader><CardContent><Skeleton className="h-8 w-1/4" /><Skeleton className="h-2 w-full mt-2" /></CardContent></Card>
+                <Card><CardHeader><Skeleton className="h-6 w-1/2" /></CardHeader><CardContent><Skeleton className="h-8 w-1/4" /><Skeleton className="h-2 w-full mt-2" /></CardContent></Card>
+            </div>
+        </div>
+    );
+}
 
 export function AdminDashboard() {
+  const [alerts, setAlerts] = useState<SecurityAlert[]>([]);
+  const [users, setUsers] = useState<UserRole[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+        const [securityAlerts, userRoles] = await Promise.all([
+            getSecurityAlerts(),
+            getUserRoles()
+        ]);
+        setAlerts(securityAlerts);
+        setUsers(userRoles);
+        setLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  if (loading) {
+      return <DashboardSkeleton />;
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -82,7 +119,7 @@ export function AdminDashboard() {
             <CardTitle>Security Alerts</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {securityAlerts.map(alert => (
+            {alerts.map(alert => (
                 <div key={alert.id} className="flex items-start gap-3">
                     <div className="p-1.5 bg-red-100 dark:bg-red-900/50 rounded-full">
                         <AlertTriangle className="h-4 w-4 text-red-500 dark:text-red-400" />
@@ -104,7 +141,7 @@ export function AdminDashboard() {
                 <CardDescription>View live user activity and security risk scores.</CardDescription>
             </CardHeader>
             <CardContent>
-                <p>There are currently {userRoles.length} active sessions.</p>
+                <p>There are currently {users.length} active sessions.</p>
                 <Button asChild className="mt-4">
                     <Link href="/dashboard/security"><ShieldCheck className="mr-2 h-4 w-4" /> Go to Security Monitoring</Link>
                 </Button>

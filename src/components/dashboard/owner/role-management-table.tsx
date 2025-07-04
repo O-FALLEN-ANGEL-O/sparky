@@ -7,21 +7,15 @@ import {
     TableRow,
   } from '@/components/ui/table';
   import { Badge } from '@/components/ui/badge';
-  import { userRoles } from '@/lib/mock-data';
+  import { getUserRoles } from '@/lib/db';
   import type { UserRole } from '@/lib/mock-data';
   import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
   import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
   import { Button } from '@/components/ui/button';
   import { MoreHorizontal } from 'lucide-react';
   
-  async function getRoles(): Promise<UserRole[]> {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      return userRoles;
-  }
-  
   export async function RoleManagementTable() {
-    const roles = await getRoles();
+    const roles = await getUserRoles();
   
     return (
       <Table>

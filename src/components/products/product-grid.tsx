@@ -1,11 +1,5 @@
-import { products } from '@/lib/mock-data';
+import { getProducts } from '@/lib/db';
 import { ProductCard } from './product-card';
-
-async function getProducts() {
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 1500));
-  return products;
-}
 
 export default async function ProductGrid() {
   const productList = await getProducts();

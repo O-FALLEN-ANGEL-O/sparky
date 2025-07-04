@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { notFound } from 'next/navigation';
 import Header from '@/components/common/header';
 import Footer from '@/components/common/footer';
-import { jobs } from '@/lib/mock-data';
+import { getJobById } from '@/lib/db';
 import type { Job } from '@/lib/mock-data';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,17 +14,41 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Check, UploadCloud, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
-
-// Function to simulate API call
-const getJobDetails = (id: string): Job | undefined => {
-    return jobs.find(j => j.id === id);
-}
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function JobApplicationPage({ params }: { params: { id: string } }) {
-  const job = getJobDetails(params.id);
+  const [job, setJob] = useState<Job | null>(null);
   const [resume, setResume] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchJob = async () => {
+        const jobDetails = await getJobById(params.id);
+        if (jobDetails) {
+            setJob(jobDetails);
+        }
+        setIsPageLoading(false);
+    }
+    fetchJob();
+  }, [params.id]);
+
+  if (isPageLoading) {
+    return (
+        <div className="flex flex-col min-h-screen bg-background">
+            <Header />
+            <main className="flex-grow container mx-auto px-4 py-16 sm:py-24">
+                <div className="max-w-4xl mx-auto">
+                    <Skeleton className="h-8 w-1/4 mb-4" />
+                    <Skeleton className="h-12 w-3/4 mb-2" />
+                    <Skeleton className="h-6 w-1/2" />
+                </div>
+            </main>
+            <Footer />
+        </div>
+    )
+  }
 
   if (!job) {
     return notFound();

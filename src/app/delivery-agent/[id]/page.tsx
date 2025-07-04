@@ -2,48 +2,42 @@
 
 import { useState, useEffect } from 'react';
 import { notFound, useRouter } from 'next/navigation';
-import { deliveries } from '@/lib/mock-data';
+import { getDeliveryById } from '@/lib/db';
 import type { Delivery, DeliveryStatus } from '@/lib/mock-data';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
 import { DeliveryStatusBadge } from '@/components/delivery/delivery-status-badge';
 import { CheckCircle, Eye, ShieldCheck, Upload, Ban, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 
-// Function to simulate API call
-const getDeliveryDetails = (id: string): Delivery | undefined => {
-    return deliveries.find(d => d.id === id);
-}
-
 export default function DeliveryDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { toast } = useToast();
-  const [delivery, setDelivery] = useState<Delivery | null>(null);
+  const [delivery, setDelivery] = useState<Delivery | null | undefined>(undefined);
   const [otp, setOtp] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const data = getDeliveryDetails(params.id);
-    if (data) {
-      setDelivery(data);
+    const fetchDelivery = async () => {
+        const data = await getDeliveryById(params.id);
+        setDelivery(data);
     }
+    fetchDelivery();
   }, [params.id]);
 
-  if (!delivery) {
-    // In a real app, you might show a loading skeleton here
-    const initialCheck = getDeliveryDetails(params.id);
-    if (!initialCheck) {
-        return notFound();
-    }
+  if (delivery === undefined) {
     return (
         <div className="flex items-center justify-center h-64">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
     );
+  }
+
+  if (delivery === null) {
+      return notFound();
   }
 
   const handleStatusUpdate = (newStatus: DeliveryStatus) => {
