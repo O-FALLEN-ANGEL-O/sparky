@@ -17,7 +17,7 @@ export default function CareersPage() {
         <section className="relative w-full py-24 md:py-32 lg:py-40 flex items-center justify-center text-center text-white bg-secondary">
           <div className="container px-4 md:px-6 space-y-4">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-headline tracking-tight text-primary">
-              Craft Your Legacy at Aura Jewels
+              Craft Your Future at Sparkle
             </h1>
             <p className="max-w-[700px] mx-auto text-lg md:text-xl text-secondary-foreground/80">
               Join our team of passionate artisans, designers, and innovators dedicated to crafting timeless Indian elegance.
@@ -32,7 +32,7 @@ export default function CareersPage() {
                     <div>
                         <h2 className="text-3xl font-headline text-primary mb-4">A Culture of Craftsmanship & Creativity</h2>
                         <p className="text-muted-foreground mb-6">
-                            At Aura Jewels, we believe that our greatest asset is our people. We foster a collaborative environment where creativity is celebrated, and every team member plays a vital role in our story. Hear from some of our team about what it's like to work here.
+                            At Sparkle, we believe that our greatest asset is our people. We foster a collaborative environment where creativity is celebrated, and every team member plays a vital role in our story. Hear from some of our team about what it's like to work here.
                         </p>
                         <div className="space-y-4">
                             <blockquote className="border-l-4 border-primary pl-4 italic">
@@ -50,7 +50,7 @@ export default function CareersPage() {
                             src="https://placehold.co/600x400.png"
                             width={600}
                             height={400}
-                            alt="Team at Aura Jewels"
+                            alt="Team at Sparkle"
                             className="rounded-lg shadow-xl"
                             data-ai-hint="diverse team working"
                         />

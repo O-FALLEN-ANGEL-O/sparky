@@ -33,7 +33,7 @@ export type UserRole = {
     id: string;
     name: string;
     email: string;
-    role: 'Owner' | 'Admin' | 'Manager' | 'Staff';
+    role: 'Owner' | 'Admin' | 'Manager' | 'Staff' | 'HR' | 'Employee' | 'Shareholder';
     permissions: string[];
     lastActivity: string;
     lastLoginIp: string;
@@ -349,7 +349,7 @@ export const orders: Order[] = [
     {
       name: 'James Rodriguez',
       avatar: 'https://placehold.co/100x100.png',
-      quote: 'Exceptional service and an even more exceptional product. The necklace I bought for my wife was a huge hit. Thank you, Aura Jewels!'
+      quote: 'Exceptional service and an even more exceptional product. The necklace I bought for my wife was a huge hit. Thank you, Sparkle!'
     },
     {
       name: 'Sophia Chen',
@@ -359,16 +359,82 @@ export const orders: Order[] = [
   ];
 
 export const userRoles: UserRole[] = [
-    { id: 'USR001', name: 'Victoria Sterling', email: 'victoria@aurajewels.com', role: 'Owner', permissions: ['All'], lastActivity: '5 minutes ago', lastLoginIp: '192.168.1.1', geo: 'New York, USA', riskScore: 2 },
-    { id: 'USR002', name: 'Arthur Pendelton', email: 'arthur@aurajewels.com', role: 'Admin', permissions: ['Manage Products', 'Manage Orders', 'View Analytics'], lastActivity: '2 hours ago', lastLoginIp: '203.0.113.24', geo: 'London, UK', riskScore: 1 },
-    { id: 'USR003', name: 'Eleanor Vance', email: 'eleanor@aurajewels.com', role: 'Manager', permissions: ['Manage Staff', 'View Store Analytics'], lastActivity: '30 minutes ago', lastLoginIp: '198.51.100.2', geo: 'Paris, France', riskScore: 5 },
-    { id: 'USR004', name: 'Isla Mae', email: 'isla@aurajewels.com', role: 'Staff', permissions: ['Process Orders', 'Update Inventory'], lastActivity: '1 hour ago', lastLoginIp: '198.51.100.2', geo: 'Paris, France', riskScore: 8 },
+    { id: 'USR001', name: 'Victoria Sterling', email: 'victoria@sparkle.com', role: 'Owner', permissions: ['All'], lastActivity: '5 minutes ago', lastLoginIp: '192.168.1.1', geo: 'New York, USA', riskScore: 2 },
+    { id: 'USR002', name: 'Arthur Pendelton', email: 'arthur@sparkle.com', role: 'Admin', permissions: ['Manage Products', 'Manage Orders', 'View Analytics'], lastActivity: '2 hours ago', lastLoginIp: '203.0.113.24', geo: 'London, UK', riskScore: 1 },
+    { id: 'USR003', name: 'Eleanor Vance', email: 'eleanor@sparkle.com', role: 'Manager', permissions: ['Manage Staff', 'View Store Analytics'], lastActivity: '30 minutes ago', lastLoginIp: '198.51.100.2', geo: 'Paris, France', riskScore: 5 },
+    { id: 'USR004', name: 'Isla Mae', email: 'isla@sparkle.com', role: 'Employee', permissions: ['Process Orders', 'Update Inventory'], lastActivity: '1 hour ago', lastLoginIp: '198.51.100.2', geo: 'Paris, France', riskScore: 8 },
 ];
 
 export const auditLogs: AuditLog[] = [
-  { id: 'LOG001', user: 'victoria@aurajewels.com', action: 'User role updated: Isla Mae to Staff', ip: '192.168.1.1', timestamp: new Date(Date.now() - 2 * 60 * 1000).toISOString(), status: 'Success' },
-  { id: 'LOG002', user: 'arthur@aurajewels.com', action: 'Product deleted: Gold Bangle Bracelet', ip: '203.0.113.24', timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString(), status: 'Success' },
-  { id: 'LOG003', user: 'system@aurajewels.com', action: 'Failed login attempt for: arthur@aurajewels.com', ip: '101.45.2.110', timestamp: new Date(Date.now() - 25 * 60 * 1000).toISOString(), status: 'Failure' },
-  { id: 'LOG004', user: 'eleanor@aurajewels.com', action: 'Emergency Maintenance Mode Enabled', ip: '198.51.100.2', timestamp: new Date(Date.now() - 62 * 60 * 1000).toISOString(), status: 'Success' },
-  { id: 'LOG005', user: 'isla@aurajewels.com', action: 'Order status updated: ORD003 to Shipped', ip: '198.51.100.2', timestamp: new Date(Date.now() - 120 * 60 * 1000).toISOString(), status: 'Success' },
+  { id: 'LOG001', user: 'victoria@sparkle.com', action: 'User role updated: Isla Mae to Staff', ip: '192.168.1.1', timestamp: new Date(Date.now() - 2 * 60 * 1000).toISOString(), status: 'Success' },
+  { id: 'LOG002', user: 'arthur@sparkle.com', action: 'Product deleted: Gold Bangle Bracelet', ip: '203.0.113.24', timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString(), status: 'Success' },
+  { id: 'LOG003', user: 'system@sparkle.com', action: 'Failed login attempt for: arthur@sparkle.com', ip: '101.45.2.110', timestamp: new Date(Date.now() - 25 * 60 * 1000).toISOString(), status: 'Failure' },
+  { id: 'LOG004', user: 'eleanor@sparkle.com', action: 'Emergency Maintenance Mode Enabled', ip: '198.51.100.2', timestamp: new Date(Date.now() - 62 * 60 * 1000).toISOString(), status: 'Success' },
+  { id: 'LOG005', user: 'isla@sparkle.com', action: 'Order status updated: ORD003 to Shipped', ip: '198.51.100.2', timestamp: new Date(Date.now() - 120 * 60 * 1000).toISOString(), status: 'Success' },
+];
+
+export const securityAlerts = [
+  { id: 1, message: 'Multiple failed login attempts from IP 101.45.2.110', timestamp: '26 minutes ago'},
+  { id: 2, message: 'High-risk session detected for user eleanor@sparkle.com', timestamp: '31 minutes ago'},
+  { id: 3, message: 'Unusual access time for user isla@sparkle.com', timestamp: '1 hour ago'},
+];
+
+export const employeeTasks = [
+    { id: 1, title: 'Finalize Q3 sales report', status: 'In Progress', progress: 75 },
+    { id: 2, title: 'Respond to customer support tickets', status: 'In Progress', progress: 50 },
+    { id: 3, title: 'Prepare for new collection photoshoot', status: 'Not Started', progress: 0 },
+    { id: 4, title: 'Complete compliance training module', status: 'Completed', progress: 100 },
+];
+
+export const hrDocuments = [
+    { id: 1, title: 'Employee Handbook 2024', date: 'Jan 15, 2024' },
+    { id: 2, title: 'Payslip - October 2024', date: 'Nov 1, 2024' },
+];
+
+export const hrAnnouncements = [
+    { id: 1, message: 'Annual performance reviews begin next week. Please schedule a meeting with your manager.' },
+    { id: 2, message: 'The office will be closed on December 25th for Christmas.' },
+    { id: 3, message: 'Reminder: Open enrollment for health insurance ends this Friday.' },
+];
+
+export const employeeLeaveBalance = [
+  { name: 'Casual', value: 5, color: 'hsl(var(--chart-1))' },
+  { name: 'Sick', value: 8, color: 'hsl(var(--chart-2))' },
+  { name: 'Earned', value: 12, color: 'hsl(var(--chart-3))' },
+];
+
+export const teamMembers = [
+    { id: 'USR004', name: 'Isla Mae', role: 'Jewelry Specialist', status: 'Online', avatar: 'https://placehold.co/100x100.png' },
+    { id: 'USR005', name: 'Liam Harris', role: 'Sales Associate', status: 'Offline', avatar: 'https://placehold.co/100x100.png' },
+    { id: 'USR006', name: 'Chloe Davis', role: 'Sales Associate', status: 'Online', avatar: 'https://placehold.co/100x100.png' },
+    { id: 'USR007', name: 'Ben Carter', role: 'Inventory Manager', status: 'Away', avatar: 'https://placehold.co/100x100.png' },
+];
+
+export const leaveRequests = [
+    { id: 1, employeeName: 'Liam Harris', type: 'Casual Leave', dateRange: 'Nov 20 - Nov 22', days: 3 },
+    { id: 2, employeeName: 'Chloe Davis', type: 'Sick Leave', dateRange: 'Nov 15', days: 1 },
+];
+
+export const teamTaskData = [
+    { name: 'Isla', completed: 12, pending: 5 },
+    { name: 'Liam', completed: 8, pending: 8 },
+    { name: 'Chloe', completed: 15, pending: 2 },
+    { name: 'Ben', completed: 10, pending: 3 },
+];
+
+export const payrollData = [
+    { month: 'May', payout: 112000 },
+    { month: 'Jun', payout: 125000 },
+    { month: 'Jul', payout: 130000 },
+    { month: 'Aug', payout: 128000 },
+    { month: 'Sep', payout: 140000 },
+    { month: 'Oct', payout: 135000 },
+];
+
+export const hrOnboardingTasks = [
+    { id: 1, task: 'Sign employment contract', completed: true },
+    { id: 2, task: 'Complete background check', completed: true },
+    { id: 3, task: 'Set up company email and accounts', completed: true },
+    { id: 4, task: 'Assign mentor and first project', completed: false },
+    { id: 5, task: 'Schedule team introduction meeting', completed: false },
 ];

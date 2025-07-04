@@ -97,7 +97,7 @@ export default function Footer() {
         </div>
         <div className="mt-12 pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-secondary-foreground/60">
-            © {new Date().getFullYear()} Aura Jewels. All rights reserved.
+            © {new Date().getFullYear()} Sparkle. All rights reserved.
           </p>
           <div className="flex gap-4">
             {socialLinks.map(link => (
