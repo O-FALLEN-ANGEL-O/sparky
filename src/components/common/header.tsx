@@ -35,6 +35,7 @@ export default function Header() {
 
   const outlineButtonClass = cn(
     'transition-colors',
+    'bg-transparent',
     'border-secondary-foreground/50 hover:bg-secondary-foreground hover:text-secondary',
     textClass
   );
