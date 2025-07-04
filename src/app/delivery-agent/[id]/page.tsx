@@ -77,7 +77,6 @@ export default function DeliveryDetailPage({ params }: { params: { id: string } 
         if (otp === delivery.otpCode) {
             setDelivery(prev => prev ? { ...prev, verified: true, status: 'delivered' } : null);
             toast({
-                className: "bg-green-100 text-green-800",
                 title: 'Delivery Verified!',
                 description: 'OTP is correct. Order marked as delivered.',
             });
@@ -179,12 +178,12 @@ export default function DeliveryDetailPage({ params }: { params: { id: string } 
         
         {delivery.verified && delivery.status === 'delivered' && (
             <>
-            <Card className="bg-green-50 border-green-200">
+            <Card className="bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800">
                 <CardHeader className="flex-row items-center gap-4 space-y-0">
-                    <CheckCircle className="h-8 w-8 text-green-600"/>
+                    <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400"/>
                     <div>
-                        <CardTitle className="text-green-800">Delivery Complete & Verified</CardTitle>
-                        <CardDescription className="text-green-700">The customer has received their order securely.</CardDescription>
+                        <CardTitle className="text-green-800 dark:text-green-300">Delivery Complete & Verified</CardTitle>
+                        <CardDescription className="text-green-700 dark:text-green-400">The customer has received their order securely.</CardDescription>
                     </div>
                 </CardHeader>
             </Card>

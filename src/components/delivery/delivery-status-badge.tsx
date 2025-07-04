@@ -10,12 +10,12 @@ const badgeVariants = cva(
   {
     variants: {
       status: {
-        pending: "bg-gray-100 text-gray-800 border-transparent",
-        assigned: "bg-blue-100 text-blue-800 border-transparent",
-        accepted: "bg-cyan-100 text-cyan-800 border-transparent",
-        out_for_delivery: "bg-yellow-100 text-yellow-800 border-transparent",
-        delivered: "bg-green-100 text-green-800 border-transparent",
-        failed: "bg-red-100 text-red-800 border-transparent",
+        pending: "bg-gray-100 text-gray-800 border-transparent dark:bg-gray-700 dark:text-gray-300",
+        assigned: "bg-blue-100 text-blue-800 border-transparent dark:bg-blue-900/50 dark:text-blue-300",
+        accepted: "bg-cyan-100 text-cyan-800 border-transparent dark:bg-cyan-900/50 dark:text-cyan-300",
+        out_for_delivery: "bg-yellow-100 text-yellow-800 border-transparent dark:bg-yellow-900/50 dark:text-yellow-300",
+        delivered: "bg-green-100 text-green-800 border-transparent dark:bg-green-900/50 dark:text-green-300",
+        failed: "bg-red-100 text-red-800 border-transparent dark:bg-red-900/50 dark:text-red-300",
       },
     },
   }

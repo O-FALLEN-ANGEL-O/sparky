@@ -8,9 +8,9 @@ const badgeVariants = cva(
   {
     variants: {
       level: {
-        low: "bg-green-100 text-green-800 border-transparent",
-        medium: "bg-yellow-100 text-yellow-800 border-transparent",
-        high: "bg-red-100 text-red-800 border-transparent",
+        low: "bg-green-100 text-green-800 border-transparent dark:bg-green-900/50 dark:text-green-300",
+        medium: "bg-yellow-100 text-yellow-800 border-transparent dark:bg-yellow-900/50 dark:text-yellow-300",
+        high: "bg-red-100 text-red-800 border-transparent dark:bg-red-900/50 dark:text-red-300",
       },
     },
   }

@@ -45,7 +45,6 @@ export default function JobApplicationPage({ params }: { params: { id: string } 
         toast({
             title: 'Application Submitted!',
             description: `Your application for the ${job.title} position has been received.`,
-            className: "bg-green-100 text-green-800",
         });
         // Reset form or redirect user
     }, 2000);
@@ -63,7 +62,7 @@ export default function JobApplicationPage({ params }: { params: { id: string } 
             </div>
             
             <div className="grid lg:grid-cols-[1.5fr_1fr] gap-12 items-start">
-                <div className="prose prose-lg max-w-none text-foreground/90">
+                <div className="prose prose-lg max-w-none text-foreground/90 dark:prose-invert">
                     <h2 className="font-headline text-2xl">Job Description</h2>
                     <p>{job.description}</p>
                     <h2 className="font-headline text-2xl mt-8">Requirements</h2>

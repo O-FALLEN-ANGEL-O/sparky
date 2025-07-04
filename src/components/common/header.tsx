@@ -26,12 +26,19 @@ export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    // A small optimization to avoid setting state on initial render if window.scrollY is 0
+    if (typeof window !== 'undefined' && window.scrollY > 10) {
+      setScrolled(true);
+    }
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Use a variable for common icon button classes to avoid repetition
+  const iconButtonClasses = cn(scrolled ? '' : 'text-white hover:bg-white/10 focus-visible:bg-white/10 data-[state=open]:bg-white/10');
 
   return (
     <header className={cn(
@@ -58,21 +65,21 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center justify-end gap-2 md:w-auto">
-          <AISearch className={cn('hover:bg-white/10 data-[state=open]:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')} />
-          <ThemeToggle className={cn('hover:bg-white/10 data-[state=open]:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')} />
+          <AISearch className={iconButtonClasses} />
+          <ThemeToggle className={iconButtonClasses} />
 
           {isLoggedIn ? (
-            <Button variant="ghost" size="icon" className={cn('hover:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')}>
+            <Button variant="ghost" size="icon" className={iconButtonClasses}>
               <User className="h-5 w-5" />
               <span className="sr-only">User Profile</span>
             </Button>
           ) : (
-            <Button asChild variant="outline" className={cn(scrolled ? 'text-primary border-primary/50 hover:bg-primary/10' : 'text-white border-white/50 hover:bg-white/10')}>
+            <Button asChild variant="outline" className={cn(scrolled ? '' : 'text-white border-white/50 hover:bg-white/10')}>
               <Link href="/dashboard">Login</Link>
             </Button>
           )}
 
-          <Button variant="ghost" size="icon" asChild className={cn('relative hover:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')}>
+          <Button variant="ghost" size="icon" asChild className={cn('relative', iconButtonClasses)}>
             <Link href="/cart">
               <ShoppingCart className="h-5 w-5" />
               <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
@@ -84,7 +91,7 @@ export default function Header() {
 
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className={cn('md:hidden hover:bg-white/10', scrolled ? 'text-foreground hover:bg-accent' : 'text-white')}>
+              <Button variant="ghost" size="icon" className={cn('md:hidden', iconButtonClasses)}>
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>

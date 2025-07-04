@@ -83,13 +83,13 @@ export default function DashboardPage() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                     <div className="bg-blue-50 border border-blue-200 p-3 rounded-lg">
-                        <p className="font-semibold text-sm text-blue-800">🚀 Suggestion</p>
-                        <p className="text-sm text-blue-700">Consider a 15% discount on 'Emerald Pendant Necklace' to boost sales by an estimated 25% this week.</p>
+                     <div className="border p-3 rounded-lg bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800">
+                        <p className="font-semibold text-sm text-blue-800 dark:text-blue-300">🚀 Suggestion</p>
+                        <p className="text-sm text-blue-700 dark:text-blue-400">Consider a 15% discount on 'Emerald Pendant Necklace' to boost sales by an estimated 25% this week.</p>
                      </div>
-                     <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-lg">
-                        <p className="font-semibold text-sm text-yellow-800">⚠️ Low Stock Alert</p>
-                        <p className="text-sm text-yellow-700">'Diamond Tennis Bracelet' is running low. Only 7 units left. Reorder soon.</p>
+                     <div className="border p-3 rounded-lg bg-yellow-50 border-yellow-200 dark:bg-yellow-950 dark:border-yellow-800">
+                        <p className="font-semibold text-sm text-yellow-800 dark:text-yellow-300">⚠️ Low Stock Alert</p>
+                        <p className="text-sm text-yellow-700 dark:text-yellow-400">'Diamond Tennis Bracelet' is running low. Only 7 units left. Reorder soon.</p>
                      </div>
                 </CardContent>
                 <Separator className="my-4" />
@@ -98,7 +98,7 @@ export default function DashboardPage() {
                     <CardDescription>High-level system-wide actions.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex items-center justify-between p-3 border rounded-lg bg-red-50/50 border-destructive/20">
+                    <div className="flex items-center justify-between p-3 border rounded-lg bg-red-50/50 border-destructive/20 dark:bg-red-950/50">
                         <div>
                             <h4 className="font-semibold text-destructive flex items-center gap-2"><AlertTriangle className="h-4 w-4" />Emergency Shutdown</h4>
                             <p className="text-sm text-muted-foreground pl-6">Activate maintenance mode.</p>
