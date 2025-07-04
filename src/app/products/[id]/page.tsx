@@ -11,6 +11,18 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import ProductGrid from '@/components/products/product-grid';
 import { Suspense } from 'react';
 import { ProductCardSkeleton } from '@/components/products/product-card-skeleton';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+import { CertificateViewer } from '@/components/products/certificate-viewer';
+
+const Dynamic3DViewer = dynamic(
+  () => import('@/components/products/product-3d-viewer').then(mod => mod.Product3DViewer),
+  {
+      ssr: false,
+      loading: () => <Skeleton className="w-full h-96 rounded-lg" />
+  }
+);
+
 
 async function getProduct(id: string): Promise<Product | undefined> {
   // Simulate API call
@@ -94,6 +106,13 @@ export default async function ProductDetailPage({
             </Accordion>
           </div>
         </div>
+
+        {(product.modelUrl || product.certificateUrl) && (
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                {product.modelUrl && <Dynamic3DViewer modelUrl={product.modelUrl} />}
+                {product.certificateUrl && <CertificateViewer certificateUrl={product.certificateUrl} />}
+            </div>
+        )}
 
         <div className="mt-20 md:mt-32">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-center mb-12 text-primary">
