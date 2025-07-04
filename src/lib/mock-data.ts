@@ -29,6 +29,15 @@ export type Testimonial = {
   quote: string;
 };
 
+export type UserRole = {
+    id: string;
+    name: string;
+    email: string;
+    role: 'Owner' | 'Admin' | 'Manager' | 'Staff';
+    permissions: string[];
+    lastActivity: string;
+}
+
 export const products: Product[] = [
   {
     id: '1',
@@ -216,3 +225,10 @@ export const orders: Order[] = [
       quote: "I'm in love with my new bracelet! It's so elegant and delicate. The entire process from browsing to delivery was seamless."
     }
   ];
+
+export const userRoles: UserRole[] = [
+    { id: 'USR001', name: 'Victoria Sterling', email: 'victoria@sparkle.com', role: 'Owner', permissions: ['All'], lastActivity: '5 minutes ago' },
+    { id: 'USR002', name: 'Arthur Pendelton', email: 'arthur@sparkle.com', role: 'Admin', permissions: ['Manage Products', 'Manage Orders', 'View Analytics'], lastActivity: '2 hours ago' },
+    { id: 'USR003', name: 'Eleanor Vance', email: 'eleanor@sparkle.com', role: 'Manager', permissions: ['Manage Staff', 'View Store Analytics'], lastActivity: '30 minutes ago' },
+    { id: 'USR004', name: 'Isla Mae', email: 'isla@sparkle.com', role: 'Staff', permissions: ['Process Orders', 'Update Inventory'], lastActivity: '1 hour ago' },
+];

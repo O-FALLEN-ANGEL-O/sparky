@@ -1,7 +1,10 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, ShoppingCart, Package, Users, Settings } from 'lucide-react';
+import { 
+    LayoutDashboard, ShoppingCart, Package, Users, Settings, 
+    Shield, Briefcase, BarChart3, Download, Globe, UserCog, Factory, LineChart, BrainCircuit, UsersRound, Building2
+} from 'lucide-react';
 import {
   SidebarHeader,
   SidebarContent,
@@ -11,19 +14,56 @@ import {
   SidebarFooter
 } from '@/components/ui/sidebar';
 import { Logo } from '../logo';
-import { Badge } from '../ui/badge';
+import type { Role } from '@/hooks/use-auth';
 
-const menuItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/dashboard/orders', label: 'Orders', icon: ShoppingCart, badge: '6' },
-  { href: '/dashboard/products', label: 'Products', icon: Package },
-  { href: '/dashboard/staff', label: 'Staff', icon: Users },
-];
+const navConfig = {
+    owner: [
+        { href: '/dashboard', label: 'Global Overview', icon: Globe },
+        { href: '/dashboard/roles', label: 'Role Management', icon: UserCog },
+        { href: '/dashboard/inventory', label: 'Live Inventory', icon: Factory },
+        { href: '/dashboard/analytics', label: 'Revenue & Profit', icon: LineChart },
+        { href: '/dashboard/ai-insights', label: 'AI Insights', icon: BrainCircuit },
+        { href: '/dashboard/reports', label: 'Download Reports', icon: Download },
+    ],
+    admin: [
+        { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+        { href: '/dashboard/orders', label: 'Orders', icon: ShoppingCart },
+        { href: '/dashboard/products', label: 'Products', icon: Package },
+        { href: '/dashboard/staff', label: 'Staff', icon: Users },
+        { href: '/dashboard/server', label: 'Server Health', icon: Shield },
+    ],
+    manager: [
+        { href: '/dashboard', label: 'Team Overview', icon: UsersRound },
+        { href: '/dashboard/tasks', label: 'Task Tracker', icon: Briefcase },
+        { href: '/dashboard/leaves', label: 'Leave Requests', icon: BarChart3 },
+    ],
+    hr: [
+        { href: '/dashboard', label: 'Employee Directory', icon: Users },
+        { href: '/dashboard/payroll', label: 'Payroll', icon: Briefcase },
+        { href: '/dashboard/onboarding', label: 'Onboarding', icon: UserCog },
+    ],
+    employee: [
+        { href: '/dashboard', label: 'My Tasks', icon: Briefcase },
+        { href: '/dashboard/leaves', label: 'My Leaves', icon: BarChart3 },
+        { href: '/dashboard/hr', label: 'HR Portal', icon: Users },
+    ],
+    shareholder: [
+        { href: '/dashboard', label: 'Company KPIs', icon: Globe },
+        { href: '/dashboard/stores', label: 'Top Stores', icon: Building2 },
+        { href: '/dashboard/top-products', label: 'Top Products', icon: Package },
+        { href: '/dashboard/reports', label: 'Monthly Reports', icon: Download },
+    ],
+};
 
 const settingsItem = { href: '/dashboard/settings', label: 'Settings', icon: Settings };
 
-export function SidebarNav() {
+type SidebarNavProps = {
+    role: Role;
+};
+
+export function SidebarNav({ role }: SidebarNavProps) {
   const pathname = usePathname();
+  const menuItems = navConfig[role] || [];
 
   return (
     <>
@@ -38,10 +78,10 @@ export function SidebarNav() {
                 href={item.href}
                 asChild
                 isActive={pathname === item.href}
+                tooltip={item.label}
               >
                 <item.icon />
                 <span>{item.label}</span>
-                {item.badge && <Badge className="ml-auto">{item.badge}</Badge>}
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
@@ -54,6 +94,7 @@ export function SidebarNav() {
                     href={settingsItem.href}
                     asChild
                     isActive={pathname === settingsItem.href}
+                    tooltip={settingsItem.label}
                 >
                     <settingsItem.icon />
                     <span>{settingsItem.label}</span>
