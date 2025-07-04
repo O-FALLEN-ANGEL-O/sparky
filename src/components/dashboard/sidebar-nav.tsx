@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
     LayoutDashboard, ShoppingCart, Package, Users, Settings, 
@@ -85,13 +86,14 @@ export function SidebarNav({ role }: SidebarNavProps) {
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
-                href={item.href}
                 asChild
                 isActive={pathname === item.href}
                 tooltip={item.label}
               >
-                <item.icon />
-                <span>{item.label}</span>
+                <Link href={item.href}>
+                  <item.icon />
+                  <span>{item.label}</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
@@ -101,13 +103,14 @@ export function SidebarNav({ role }: SidebarNavProps) {
         <SidebarMenu>
             <SidebarMenuItem>
                 <SidebarMenuButton
-                    href={settingsItem.href}
                     asChild
                     isActive={pathname === settingsItem.href}
                     tooltip={settingsItem.label}
                 >
+                  <Link href={settingsItem.href}>
                     <settingsItem.icon />
                     <span>{settingsItem.label}</span>
+                  </Link>
                 </SidebarMenuButton>
             </SidebarMenuItem>
         </SidebarMenu>
