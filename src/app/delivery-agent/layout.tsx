@@ -13,7 +13,7 @@ export default function DeliveryAgentLayout({
             <div className="flex items-center gap-4">
                 <p className="text-sm font-medium">Dash Delivero</p>
                 <Avatar className="h-9 w-9">
-                    <AvatarImage src="https://placehold.co/100x100" alt="Dash Delivero" />
+                    <AvatarImage src="https://placehold.co/100x100" alt="Dash Delivero" data-ai-hint="person face" />
                     <AvatarFallback>DD</AvatarFallback>
                 </Avatar>
             </div>

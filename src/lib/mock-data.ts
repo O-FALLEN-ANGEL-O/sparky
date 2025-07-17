@@ -50,6 +50,7 @@ export type UserRole = {
     lastLoginIp: string;
     geo: string;
     riskScore: number;
+    avatar: string;
 }
 
 export type AuditLog = {

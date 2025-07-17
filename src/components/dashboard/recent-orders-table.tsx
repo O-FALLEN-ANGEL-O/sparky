@@ -40,7 +40,7 @@ export function RecentOrdersTable() {
             <TableCell>
               <div className="flex items-center gap-3">
                 <Avatar>
-                  <AvatarImage src={order.customer.avatar} alt={order.customer.name} />
+                  <AvatarImage src={order.customer.avatar} alt={order.customer.name} data-ai-hint="person face" />
                   <AvatarFallback>{order.customer.name.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div>

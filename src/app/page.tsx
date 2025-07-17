@@ -38,7 +38,7 @@ async function TestimonialsSection() {
           {testimonials.map((testimonial: Testimonial) => (
             <div key={testimonial.name} className="bg-background/10 p-6 rounded-lg flex flex-col items-center text-center">
               <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
-                <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint="person face" />
                 <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <div className="flex gap-0.5 mb-2">

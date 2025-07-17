@@ -145,10 +145,10 @@ const cartItems: CartItem[] = [
 ];
 
 const userRoles: UserRole[] = [
-    { id: 'usr_001', name: 'Victoria Sterling', email: 'victoria@example.com', role: 'Owner', permissions: ['all'], lastActivity: '5 min ago', lastLoginIp: '192.168.1.1', geo: 'New York, USA', riskScore: 1 },
-    { id: 'usr_002', name: 'Arthur Pendelton', email: 'arthur@example.com', role: 'Admin', permissions: ['manage_products', 'view_orders'], lastActivity: '2 hours ago', lastLoginIp: '8.8.8.8', geo: 'London, UK', riskScore: 3 },
-    { id: 'usr_003', name: 'Eleanor Vance', email: 'eleanor@example.com', role: 'Manager', permissions: ['view_reports', 'manage_staff'], lastActivity: '1 day ago', lastLoginIp: '103.22.4.1', geo: 'Sydney, AU', riskScore: 8 },
-    { id: 'usr_004', name: 'Isla Mae', email: 'isla@example.com', role: 'Staff', permissions: ['view_orders'], lastActivity: '30 min ago', lastLoginIp: '212.58.244.70', geo: 'Paris, FR', riskScore: 5 },
+    { id: 'usr_001', name: 'Victoria Sterling', email: 'victoria@example.com', role: 'Owner', permissions: ['all'], lastActivity: '5 min ago', lastLoginIp: '192.168.1.1', geo: 'New York, USA', riskScore: 1, avatar: 'https://placehold.co/100x100' },
+    { id: 'usr_002', name: 'Arthur Pendelton', email: 'arthur@example.com', role: 'Admin', permissions: ['manage_products', 'view_orders'], lastActivity: '2 hours ago', lastLoginIp: '8.8.8.8', geo: 'London, UK', riskScore: 3, avatar: 'https://placehold.co/100x100' },
+    { id: 'usr_003', name: 'Eleanor Vance', email: 'eleanor@example.com', role: 'Manager', permissions: ['view_reports', 'manage_staff'], lastActivity: '1 day ago', lastLoginIp: '103.22.4.1', geo: 'Sydney, AU', riskScore: 8, avatar: 'https://placehold.co/100x100' },
+    { id: 'usr_004', name: 'Isla Mae', email: 'isla@example.com', role: 'Staff', permissions: ['view_orders'], lastActivity: '30 min ago', lastLoginIp: '212.58.244.70', geo: 'Paris, FR', riskScore: 5, avatar: 'https://placehold.co/100x100' },
 ]
 
 const auditLogs: AuditLog[] = [
