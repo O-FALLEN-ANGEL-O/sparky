@@ -38,9 +38,9 @@ const products: Product[] = [
     description:
       'A timeless classic, this solitaire diamond ring features a brilliant-cut 0.5 carat diamond set in a 14k white gold band. Perfect for engagements or as a statement piece.',
     images: [
-      'https://placehold.co/600x600.png',
-      'https://placehold.co/600x600.png',
-      'https://placehold.co/600x600.png',
+      'https://placehold.co/600x600',
+      'https://placehold.co/600x600',
+      'https://placehold.co/600x600',
     ],
     category: 'Rings',
     rating: 4.9,
@@ -54,7 +54,7 @@ const products: Product[] = [
     price: 850,
     description:
       'This stunning necklace showcases a vibrant, pear-shaped emerald surrounded by a halo of sparkling diamonds, suspended from an 18-inch gold chain.',
-    images: ['https://placehold.co/600x600.png'],
+    images: ['https://placehold.co/600x600'],
     category: 'Necklaces',
     rating: 4.8,
     stock: 22,
@@ -65,7 +65,7 @@ const products: Product[] = [
     price: 650,
     description:
       'Elegant and sophisticated, these stud earrings feature deep blue, round-cut sapphires, each set in a four-prong sterling silver setting.',
-    images: ['https://placehold.co/600x600.png'],
+    images: ['https://placehold.co/600x600'],
     category: 'Earrings',
     rating: 4.7,
     stock: 30,
@@ -77,7 +77,7 @@ const products: Product[] = [
     price: 980,
     description:
       'A solid 18k gold bangle bracelet with a high-polish finish. Its minimalist design makes it versatile for both casual and formal wear.',
-    images: ['https://placehold.co/600x600.png'],
+    images: ['https://placehold.co/600x600'],
     category: 'Bracelets',
     rating: 4.9,
     stock: 12,
@@ -88,7 +88,7 @@ const products: Product[] = [
     price: 450,
     description:
       'A beautiful single-strand choker made with genuine freshwater pearls, featuring a vintage-style silver clasp. A touch of classic elegance.',
-    images: ['https://placehold.co/600x600.png'],
+    images: ['https://placehold.co/600x600'],
     category: 'Necklaces',
     rating: 4.6,
     stock: 18,
@@ -99,7 +99,7 @@ const products: Product[] = [
     price: 1500,
     description:
       'Make a statement with these breathtaking drop earrings, featuring fiery red rubies dangling from a diamond-encrusted lever-back setting.',
-    images: ['https://placehold.co/600x600.png'],
+    images: ['https://placehold.co/600x600'],
     category: 'Earrings',
     rating: 4.9,
     stock: 9,
@@ -111,7 +111,7 @@ const products: Product[] = [
     price: 300,
     description:
       'A modern and durable wedding band for men, crafted from lightweight, scratch-resistant titanium with a matte finish.',
-    images: ['https://placehold.co/600x600.png'],
+    images: ['https://placehold.co/600x600'],
     category: 'Rings',
     rating: 4.8,
     stock: 40,
@@ -122,7 +122,7 @@ const products: Product[] = [
     price: 2500,
     description:
       'An exquisite tennis bracelet featuring a continuous line of brilliant-cut diamonds, totaling 2.0 carats, set in platinum.',
-    images: ['https://placehold.co/600x600.png'],
+    images: ['https://placehold.co/600x600'],
     category: 'Bracelets',
     rating: 5.0,
     stock: 7,
@@ -137,7 +137,7 @@ const orders: Order[] = [
     customer: {
       name: 'Alice Johnson',
       email: 'alice@example.com',
-      avatar: 'https://placehold.co/32x32.png',
+      avatar: 'https://placehold.co/32x32',
     },
     date: '2023-10-26',
     status: 'Delivered',
@@ -148,7 +148,7 @@ const orders: Order[] = [
     customer: {
       name: 'Bob Williams',
       email: 'bob@example.com',
-      avatar: 'https://placehold.co/32x32.png',
+      avatar: 'https://placehold.co/32x32',
     },
     date: '2023-10-25',
     status: 'Shipped',
@@ -159,7 +159,7 @@ const orders: Order[] = [
     customer: {
       name: 'Charlie Brown',
       email: 'charlie@example.com',
-      avatar: 'https://placehold.co/32x32.png',
+      avatar: 'https://placehold.co/32x32',
     },
     date: '2023-10-25',
     status: 'Processing',
@@ -170,7 +170,7 @@ const orders: Order[] = [
     customer: {
       name: 'Diana Prince',
       email: 'diana@example.com',
-      avatar: 'https://placehold.co/32x32.png',
+      avatar: 'https://placehold.co/32x32',
     },
     date: '2023-10-24',
     status: 'Pending',
@@ -181,7 +181,7 @@ const orders: Order[] = [
     customer: {
       name: 'Ethan Hunt',
       email: 'ethan@example.com',
-      avatar: 'https://placehold.co/32x32.png',
+      avatar: 'https://placehold.co/32x32',
     },
     date: '2023-10-23',
     status: 'Delivered',
@@ -192,19 +192,19 @@ const orders: Order[] = [
 const testimonials: Testimonial[] = [
   {
     name: 'Emily Carter',
-    avatar: 'https://placehold.co/100x100.png',
+    avatar: 'https://placehold.co/100x100',
     quote:
       "The ring I purchased is absolutely breathtaking. The craftsmanship is top-notch, and it sparkles from every angle. I couldn't be happier!",
   },
   {
     name: 'James Rodriguez',
-    avatar: 'https://placehold.co/100x100.png',
+    avatar: 'https://placehold.co/100x100',
     quote:
       'Exceptional service and an even more exceptional product. The necklace I bought for my wife was a huge hit. Thank you, Sparkle!',
   },
   {
     name: 'Sophia Chen',
-    avatar: 'https://placehold.co/100x100.png',
+    avatar: 'https://placehold.co/100x100',
     quote:
       "I'm in love with my new bracelet! It's so elegant and delicate. The entire process from browsing to delivery was seamless.",
   },
@@ -342,7 +342,7 @@ const deliveries: Delivery[] = [
     otpCode: '987654',
     verified: true,
     lastUpdate: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
-    proofImageUrl: 'https://placehold.co/600x400.png',
+    proofImageUrl: 'https://placehold.co/600x400',
   },
   {
     id: 'del-4',
@@ -361,8 +361,8 @@ const deliveries: Delivery[] = [
 ];
 
 const deliveryAgents: DeliveryAgent[] = [
-  { id: 'agent-1', name: 'Alex Ray', phone: '123-456-7890', avatar: 'https://placehold.co/100x100.png' },
-  { id: 'agent-2', name: 'Ben Carter', phone: '234-567-8901', avatar: 'https://placehold.co/100x100.png' },
+  { id: 'agent-1', name: 'Alex Ray', phone: '123-456-7890', avatar: 'https://placehold.co/100x100' },
+  { id: 'agent-2', name: 'Ben Carter', phone: '234-567-8901', avatar: 'https://placehold.co/100x100' },
 ];
 
 const jobs: Job[] = [
@@ -426,10 +426,10 @@ const employeeLeaveBalance: LeaveBalance[] = [
 ];
 
 const teamMembers: TeamMember[] = [
-  { id: 'USR004', name: 'Isla Mae', role: 'Jewelry Specialist', status: 'Online', avatar: 'https://placehold.co/100x100.png' },
-  { id: 'USR005', name: 'Liam Harris', role: 'Sales Associate', status: 'Offline', avatar: 'https://placehold.co/100x100.png' },
-  { id: 'USR006', name: 'Chloe Davis', role: 'Sales Associate', status: 'Online', avatar: 'https://placehold.co/100x100.png' },
-  { id: 'USR007', name: 'Ben Carter', role: 'Inventory Manager', status: 'Away', avatar: 'https://placehold.co/100x100.png' },
+  { id: 'USR004', name: 'Isla Mae', role: 'Jewelry Specialist', status: 'Online', avatar: 'https://placehold.co/100x100' },
+  { id: 'USR005', name: 'Liam Harris', role: 'Sales Associate', status: 'Offline', avatar: 'https://placehold.co/100x100' },
+  { id: 'USR006', name: 'Chloe Davis', role: 'Sales Associate', status: 'Online', avatar: 'https://placehold.co/100x100' },
+  { id: 'USR007', name: 'Ben Carter', role: 'Inventory Manager', status: 'Away', avatar: 'https://placehold.co/100x100' },
 ];
 
 const leaveRequests: LeaveRequest[] = [

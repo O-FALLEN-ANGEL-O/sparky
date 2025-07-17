@@ -49,7 +49,7 @@ export default async function CareersPage() {
                     </div>
                     <div>
                         <Image 
-                            src="https://placehold.co/600x400.png"
+                            src="https://placehold.co/600x400"
                             width={600}
                             height={400}
                             alt="Team at Sparkle"

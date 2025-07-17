@@ -23,7 +23,7 @@ export default function DeliveriesPage() {
         <CardContent>
           <div className="h-96 w-full bg-muted rounded-lg flex items-center justify-center">
              <Image 
-                src="https://placehold.co/1200x400.png"
+                src="https://placehold.co/1200x400"
                 width={1200}
                 height={400}
                 alt="Map placeholder"

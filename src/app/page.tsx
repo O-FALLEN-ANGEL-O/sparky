@@ -13,10 +13,10 @@ import type { Testimonial } from '@/lib/mock-data';
 import { Input } from '@/components/ui/input';
 
 const collections = [
-  { name: 'Rings Collection', href: '#', image: 'https://placehold.co/400x500.png', hint: 'rings collection' },
-  { name: 'Necklaces Collection', href: '#', image: 'https://placehold.co/400x500.png', hint: 'necklaces collection' },
-  { name: 'Bracelets Collection', href: '#', image: 'https://placehold.co/400x500.png', hint: 'bracelets collection' },
-  { name: 'Earrings Collection', href: '#', image: 'https://placehold.co/400x500.png', hint: 'earrings collection' },
+  { name: 'Rings Collection', href: '#', image: 'https://placehold.co/400x500', hint: 'rings collection' },
+  { name: 'Necklaces Collection', href: '#', image: 'https://placehold.co/400x500', hint: 'necklaces collection' },
+  { name: 'Bracelets Collection', href: '#', image: 'https://placehold.co/400x500', hint: 'bracelets collection' },
+  { name: 'Earrings Collection', href: '#', image: 'https://placehold.co/400x500', hint: 'earrings collection' },
 ];
 
 const features = [
@@ -62,7 +62,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center text-center text-secondary-foreground">
           <Image
-            src="https://placehold.co/1920x1080.png"
+            src="https://placehold.co/1920x1080"
             alt="Hero background"
             fill
             className="object-cover z-0"

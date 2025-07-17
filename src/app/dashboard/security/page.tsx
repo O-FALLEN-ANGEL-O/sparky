@@ -41,7 +41,7 @@ export default async function SecurityPage() {
                   <TableCell>
                     <div className="flex items-center gap-3">
                       <Avatar>
-                        <AvatarImage src={`https://placehold.co/40x40.png`} alt={user.name} />
+                        <AvatarImage src={`https://placehold.co/40x40`} alt={user.name} />
                         <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
                       </Avatar>
                       <div>

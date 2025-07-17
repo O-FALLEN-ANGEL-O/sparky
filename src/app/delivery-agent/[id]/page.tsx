@@ -104,7 +104,7 @@ export default function DeliveryDetailPage({ params }: { params: { id: string } 
                 <p className="text-muted-foreground">{delivery.customer.phone}</p>
                  <div className="h-48 mt-4 w-full bg-muted rounded-lg flex items-center justify-center">
                     <Image 
-                        src="https://placehold.co/800x300.png"
+                        src="https://placehold.co/800x300"
                         width={800}
                         height={300}
                         alt="Map placeholder"
